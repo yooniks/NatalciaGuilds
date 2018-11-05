@@ -1,7 +1,13 @@
 package xyz.yooniks.natalciaguilds.api;
 
-public interface GuildArea<T> {
+import xyz.yooniks.natalciaguilds.api.member.GuildMember;
 
-  T getCorner(boolean first);
+public interface GuildArea {
+
+  boolean isInArea(GuildMember member);
+
+  int getSize();
+
+  void update();
 
 }
