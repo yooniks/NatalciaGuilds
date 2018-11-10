@@ -2,8 +2,8 @@ package xyz.yooniks.natalciaguilds.bukkit.guild;
 
 import java.util.HashSet;
 import java.util.Set;
-import xyz.yooniks.natalciaguilds.api.Guild;
-import xyz.yooniks.natalciaguilds.api.GuildArea;
+import xyz.yooniks.natalciaguilds.api.guild.Guild;
+import xyz.yooniks.natalciaguilds.api.guild.GuildArea;
 import xyz.yooniks.natalciaguilds.api.member.GuildMember;
 
 public class GuildImpl implements Guild {

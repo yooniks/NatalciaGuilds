@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.api;
+package xyz.yooniks.natalciaguilds.api.guild;
 
 import java.util.Set;
 import xyz.yooniks.natalciaguilds.api.member.GuildMember;
@@ -9,7 +9,7 @@ public interface Guild {
 
   String getName();
 
-  GuildArea<?> getArea();
+  GuildArea getArea();
 
   Set<GuildMember> getMembers();
 

@@ -2,7 +2,7 @@ package xyz.yooniks.natalciaguilds.bukkit;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.yooniks.natalciaguilds.NatalciaGuilds;
-import xyz.yooniks.natalciaguilds.api.GuildManager;
+import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildManagerImpl;
 
 public final class NatalciaGuildsBukkit extends JavaPlugin implements NatalciaGuilds {
