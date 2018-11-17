@@ -1,9 +1,9 @@
-package xyz.yooniks.natalciaguilds.api;
+package xyz.yooniks.natalciaguilds.api.database;
 
 import java.util.List;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 
-public interface GuildDatabaseUpdater {
+public interface GuildDatabaseManager {
 
   List<Guild> findAll();
 

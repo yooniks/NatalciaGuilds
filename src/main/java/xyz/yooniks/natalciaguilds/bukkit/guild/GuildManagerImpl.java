@@ -1,5 +1,6 @@
 package xyz.yooniks.natalciaguilds.bukkit.guild;
 
+import com.google.common.collect.ImmutableList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,12 +10,27 @@ import javax.annotation.Nullable;
 import org.bukkit.Location;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
-import xyz.yooniks.natalciaguilds.api.member.GuildMember;
-import xyz.yooniks.natalciaguilds.bukkit.GuildHelper;
+import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
+import xyz.yooniks.natalciaguilds.bukkit.helper.GuildHelper;
 
 public class GuildManagerImpl implements GuildManager {
 
   private final Map<String, Guild> guilds = new HashMap<>();
+
+  @Override
+  public void createGuild(Guild guild) {
+    this.guilds.put(guild.getTag(), guild);
+  }
+
+  @Override
+  public void removeGuild(Guild guild) {
+    this.guilds.remove(guild.getTag());
+  }
+
+  @Override
+  public List<Guild> getGuilds() {
+    return ImmutableList.copyOf(guilds.values());
+  }
 
   @Nullable
   @Override
@@ -37,7 +53,7 @@ public class GuildManagerImpl implements GuildManager {
   public Guild findByMember(GuildMember member) {
     return this.guilds.values()
         .stream()
-        .filter(guild -> this.guildsMembersByIdentifiers(guild).contains(member.getIdentifier()))
+        .filter(guild -> this.identifiersOfGuildMembers(guild).contains(member.getIdentifier()))
         .findFirst()
         .orElse(null);
   }
@@ -51,7 +67,7 @@ public class GuildManagerImpl implements GuildManager {
         .orElse(null);
   }
 
-  private List<UUID> guildsMembersByIdentifiers(Guild guild) {
+  private List<UUID> identifiersOfGuildMembers(Guild guild) {
     return guild.getMembers().stream().map(GuildMember::getIdentifier).collect(Collectors.toList());
   }
 

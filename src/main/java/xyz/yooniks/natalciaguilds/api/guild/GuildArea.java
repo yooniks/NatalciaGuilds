@@ -1,6 +1,6 @@
 package xyz.yooniks.natalciaguilds.api.guild;
 
-import xyz.yooniks.natalciaguilds.api.member.GuildMember;
+import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 
 public interface GuildArea {
 

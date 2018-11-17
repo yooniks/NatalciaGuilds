@@ -4,8 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import xyz.yooniks.natalciaguilds.api.guild.GuildArea;
-import xyz.yooniks.natalciaguilds.api.member.GuildMember;
-import xyz.yooniks.natalciaguilds.bukkit.GuildHelper;
+import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
+import xyz.yooniks.natalciaguilds.bukkit.helper.GuildHelper;
 
 public class GuildAreaImpl implements GuildArea {
 
