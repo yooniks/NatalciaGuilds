@@ -11,7 +11,6 @@ import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.GuildArea;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildAreaImpl;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildImpl;
-import xyz.yooniks.natalciaguilds.bukkit.helper.GuildHelper;
 import xyz.yooniks.natalciaguilds.bukkit.helper.LocationHelper;
 
 public class GuildSqlDatabaseManager implements GuildDatabaseManager {
