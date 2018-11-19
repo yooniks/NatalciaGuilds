@@ -1,8 +1,0 @@
-name: 'NatalciaGuilds'
-version: ${project.version}
-main: 'xyz.yooniks.natalciaguilds.NatalciaGuilds'
-loadbefore: [PlaceHolderApi]
-softdepend: [PlaceHolderApi]
-authors: [yooniks]
-description: 'Plugin na gildie, pisany 4fun'
-website: 'https://youtube.com/c/Enchanted3'
