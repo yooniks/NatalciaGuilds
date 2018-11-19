@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.api.guild;
+package xyz.yooniks.natalciaguilds.api.guild.area;
 
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 

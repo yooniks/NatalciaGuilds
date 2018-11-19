@@ -1,18 +1,18 @@
-package xyz.yooniks.natalciaguilds.api.guild.member;
+package xyz.yooniks.natalciaguilds.bukkit.user;
 
 import java.util.UUID;
-import javax.annotation.Nullable;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
+import xyz.yooniks.natalciaguilds.api.user.User;
 
-public class GuildMemberImpl implements GuildMember {
+public class UserImpl implements User {
 
   private final UUID identifier;
   private final Ranking ranking;
 
   private Guild guild;
 
-  public GuildMemberImpl(UUID identifier, Ranking ranking) {
+  public UserImpl(UUID identifier, Ranking ranking) {
     this.identifier = identifier;
     this.ranking = ranking;
   }
@@ -22,18 +22,19 @@ public class GuildMemberImpl implements GuildMember {
     return identifier;
   }
 
-  @Nullable
+  @Override
+  public Ranking getRanking() {
+    return ranking;
+  }
+
   @Override
   public Guild getGuild() {
     return guild;
   }
 
   @Override
-  public Ranking getRanking() {
-    return ranking;
-  }
-
   public void setGuild(Guild guild) {
     this.guild = guild;
   }
+
 }

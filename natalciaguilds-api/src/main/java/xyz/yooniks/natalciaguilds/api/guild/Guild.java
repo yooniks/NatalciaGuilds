@@ -1,11 +1,12 @@
 package xyz.yooniks.natalciaguilds.api.guild;
 
 import java.util.Set;
+import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
 
-public interface Guild extends Ranking {
+public interface Guild {
 
   String getTag();
 
@@ -16,6 +17,8 @@ public interface Guild extends Ranking {
   Set<GuildMember> getMembers();
 
   GuildMember getOwner();
+
+  Ranking getRanking();
 
   boolean hasPermission(GuildMember member, GuildPermission permission);
 

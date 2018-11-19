@@ -3,7 +3,7 @@ package xyz.yooniks.natalciaguilds.bukkit.guild;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import xyz.yooniks.natalciaguilds.api.guild.GuildArea;
+import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.bukkit.helper.GuildHelper;
 

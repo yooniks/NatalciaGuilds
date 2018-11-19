@@ -20,7 +20,11 @@ public class GuildPermissionBuilder implements Buildable<GuildPermission> {
 
   @Override
   public GuildPermission build() {
-    Validate.notNull(this.id, "Id cannot be null!");
+    Validate.isTrue(
+        GuildPermissions.byId(this.id) != null,
+        String.format("GuildPermission with id %d already exists!", this.id)
+    );
+
     Validate.notNull(this.name, "Name cannot be null!");
     return new GuildPermissionImpl(this.id, this.name);
   }

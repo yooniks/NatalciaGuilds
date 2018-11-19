@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
-import xyz.yooniks.natalciaguilds.api.guild.GuildArea;
+import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermissions;
@@ -16,14 +16,16 @@ public class GuildImpl implements Guild {
 
   private final String tag, name;
   private final GuildArea area;
+  private final Ranking ranking;
 
   private final Set<GuildMember> members = new HashSet<>();
   private final Multimap<UUID, GuildPermission> permissions = ArrayListMultimap.create();
 
-  public GuildImpl(String tag, String name, GuildArea area) {
+  public GuildImpl(String tag, String name, GuildArea area, Ranking ranking) {
     this.tag = tag;
     this.name = name;
     this.area = area;
+    this.ranking = ranking;
   }
 
   @Override
@@ -70,30 +72,8 @@ public class GuildImpl implements Guild {
   }
 
   @Override
-  public double calculateKDRatio() {
-    return this.getDeaths() == 0 ? this.getKills() : 1.0F * this.getKills() / this.getDeaths();
-  }
-
-  @Override
-  public int getDeaths() {
-    return this.members.stream()
-        .mapToInt(Ranking::getDeaths)
-        .sum();
-  }
-
-  @Override
-  public int getKills() {
-    return this.members.stream()
-        .mapToInt(Ranking::getKills)
-        .sum();
-  }
-
-  @Override
-  public int getPoints() {
-    return this.members
-        .stream()
-        .mapToInt(Ranking::getPoints)
-        .sum() / this.members.size();
+  public Ranking getRanking() {
+    return ranking;
   }
 
 }

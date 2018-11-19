@@ -1,7 +1,7 @@
 package xyz.yooniks.natalciaguilds.bukkit.helper;
 
 import org.bukkit.Location;
-import xyz.yooniks.natalciaguilds.api.guild.GuildArea;
+import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 
 public final class GuildHelper {
 
