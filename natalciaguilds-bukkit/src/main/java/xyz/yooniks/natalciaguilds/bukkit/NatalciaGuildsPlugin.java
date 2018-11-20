@@ -50,4 +50,8 @@ public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGu
     }
   }
 
+  public static NatalciaGuildsPlugin getInstance() {
+    return NatalciaGuildsPlugin.getPlugin(NatalciaGuildsPlugin.class);
+  }
+
 }

@@ -16,6 +16,10 @@ public interface Guild {
 
   Set<GuildMember> getMembers();
 
+  void addMember(GuildMember member);
+
+  void removeMember(GuildMember member);
+
   GuildMember getOwner();
 
   Ranking getRanking();

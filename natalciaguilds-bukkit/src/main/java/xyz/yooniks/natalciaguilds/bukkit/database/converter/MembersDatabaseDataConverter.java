@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.database;
+package xyz.yooniks.natalciaguilds.bukkit.database.converter;
 
 import java.util.Arrays;
 import java.util.Set;

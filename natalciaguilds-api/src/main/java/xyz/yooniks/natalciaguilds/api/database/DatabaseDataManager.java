@@ -3,12 +3,12 @@ package xyz.yooniks.natalciaguilds.api.database;
 import java.util.List;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 
-public interface GuildDatabaseManager {
+public interface DatabaseDataManager<T> {
 
-  List<Guild> findAll();
+  List<T> findAll();
 
-  void update(Guild guild);
+  void update(T t);
 
-  void remove(Guild guild);
+  void remove(T t);
 
 }

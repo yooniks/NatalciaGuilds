@@ -11,6 +11,7 @@ import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermissions;
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
+import xyz.yooniks.natalciaguilds.api.ranking.impl.GuildRanking;
 
 public class GuildImpl implements Guild {
 
@@ -18,14 +19,23 @@ public class GuildImpl implements Guild {
   private final GuildArea area;
   private final Ranking ranking;
 
-  private final Set<GuildMember> members = new HashSet<>();
+  private final Set<GuildMember> members;
   private final Multimap<UUID, GuildPermission> permissions = ArrayListMultimap.create();
 
-  public GuildImpl(String tag, String name, GuildArea area, Ranking ranking) {
+  public GuildImpl(String tag, String name, GuildArea area, Set<GuildMember> members) {
     this.tag = tag;
     this.name = name;
     this.area = area;
-    this.ranking = ranking;
+    this.members = members;
+    this.ranking = new GuildRanking(this);
+  }
+
+  public GuildImpl(String tag, String name, GuildArea area) {
+    this.tag = tag;
+    this.name = name;
+    this.area = area;
+    this.members = new HashSet<>();
+    this.ranking = new GuildRanking(this);
   }
 
   @Override
@@ -41,6 +51,21 @@ public class GuildImpl implements Guild {
   @Override
   public boolean hasPermission(GuildMember member, GuildPermission permission) {
     return permissions.containsEntry(member.getIdentifier(), permission);
+  }
+
+  @Override
+  public Set<GuildMember> getMembers() {
+    return members;
+  }
+
+  @Override
+  public void addMember(GuildMember member) {
+    this.members.add(member);
+  }
+
+  @Override
+  public void removeMember(GuildMember member) {
+    this.members.remove(member);
   }
 
   @Override
@@ -64,11 +89,6 @@ public class GuildImpl implements Guild {
   @Override
   public GuildArea getArea() {
     return area;
-  }
-
-  @Override
-  public Set<GuildMember> getMembers() {
-    return members;
   }
 
   @Override

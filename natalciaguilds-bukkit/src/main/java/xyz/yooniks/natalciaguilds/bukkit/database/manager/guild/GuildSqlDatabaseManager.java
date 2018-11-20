@@ -1,19 +1,21 @@
-package xyz.yooniks.natalciaguilds.bukkit.database;
+package xyz.yooniks.natalciaguilds.bukkit.database.manager.guild;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import xyz.yooniks.natalciaguilds.api.database.GuildDatabaseManager;
+import xyz.yooniks.natalciaguilds.api.database.DatabaseDataManager;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
+import xyz.yooniks.natalciaguilds.bukkit.database.converter.DatabaseDataConverters;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildAreaImpl;
-import xyz.yooniks.natalciaguilds.bukkit.guild.GuildImpl;
+import xyz.yooniks.natalciaguilds.bukkit.guild.GuildBuilder;
 import xyz.yooniks.natalciaguilds.bukkit.helper.LocationHelper;
 
-public class GuildSqlDatabaseManager implements GuildDatabaseManager {
+public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
 
   private final Connection connection;
 
@@ -23,17 +25,24 @@ public class GuildSqlDatabaseManager implements GuildDatabaseManager {
 
   @Override
   public List<Guild> findAll() {
-    try (final PreparedStatement statement = this.connection.prepareStatement("SELECT * FROM guilds")) {
+    try (final PreparedStatement statement = this.connection
+        .prepareStatement("SELECT * FROM guilds")) {
       final ResultSet result = statement.executeQuery();
       final List<Guild> guilds = new ArrayList<>();
       while (result.next()) {
-        guilds.add(new GuildImpl(
-            result.getString("guild_tag"), result.getString("guild_name"),
-            new GuildAreaImpl(
-                LocationHelper.fromString(result.getString("area_location")),
-                result.getInt("area_size")
-            )
-        ));
+        final String name = result.getString("guild_name");
+        final String tag = result.getString("guild_tag");
+        final GuildArea area = new GuildAreaImpl(
+            LocationHelper.fromString(result.getString("area_location")),
+            result.getInt("area_size"));
+
+        guilds.add(new GuildBuilder()
+            .withName(name)
+            .withTag(tag)
+            .withArea(area)
+            .withMembers(new HashSet<>())
+            .build()
+        );
       }
       return guilds;
     } catch (Exception ex) {
