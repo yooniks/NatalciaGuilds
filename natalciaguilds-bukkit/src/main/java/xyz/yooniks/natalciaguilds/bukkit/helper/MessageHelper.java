@@ -1,6 +1,7 @@
 package xyz.yooniks.natalciaguilds.bukkit.helper;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public final class MessageHelper {
@@ -9,8 +10,8 @@ public final class MessageHelper {
     return ChatColor.translateAlternateColorCodes('&', text);
   }
 
-  public static void sendMessage(Player player, String text) {
-    player.sendMessage(colored(text));
+  public static void sendMessage(CommandSender sender, String text) {
+    sender.sendMessage(colored(text));
   }
 
   private MessageHelper() {
