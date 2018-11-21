@@ -8,6 +8,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.bukkit.Location;
+import xyz.yooniks.natalciaguilds.api.database.DatabaseDataManager;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
@@ -16,15 +17,34 @@ import xyz.yooniks.natalciaguilds.bukkit.helper.GuildHelper;
 public class GuildManagerImpl implements GuildManager {
 
   private final Map<String, Guild> guilds = new HashMap<>();
+  private DatabaseDataManager<Guild> databaseManager;
+
+  @Override
+  public void addGuilds(List<Guild> guilds) {
+    guilds.forEach(guild -> this.guilds.put(guild.getTag(), guild));
+  }
 
   @Override
   public void createGuild(Guild guild) {
     this.guilds.put(guild.getTag(), guild);
+    this.databaseManager.update(guild);
   }
 
   @Override
   public void removeGuild(Guild guild) {
     this.guilds.remove(guild.getTag());
+    this.databaseManager.remove(guild);
+  }
+
+  @Override
+  public DatabaseDataManager<Guild> getDatabaseManager() {
+    return this.databaseManager;
+  }
+
+  @Override
+  public void setDatabaseManager(
+      DatabaseDataManager<Guild> databaseManager) {
+    this.databaseManager = databaseManager;
   }
 
   @Override

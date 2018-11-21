@@ -7,7 +7,9 @@ import java.net.URISyntaxException;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.yooniks.natalciaguilds.api.NatalciaGuilds;
 import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
+import xyz.yooniks.natalciaguilds.bukkit.database.manager.guild.GuildFlatDataManager;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildManagerImpl;
+import xyz.yooniks.natalciaguilds.bukkit.helper.CommandHelper;
 import xyz.yooniks.natalciaguilds.bukkit.helper.URIHelper;
 
 public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGuilds {
@@ -17,6 +19,13 @@ public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGu
   @Override
   public void onEnable() {
     this.guildManager = new GuildManagerImpl();
+    //set database manager and load guilds
+    this.guildManager.setDatabaseManager(new GuildFlatDataManager());
+    this.guildManager.addGuilds(this.guildManager.getDatabaseManager().findAll());
+
+    //main command, others are inside main command as arguments
+    CommandHelper.registerCommand("g", null);
+
     this.printVersion();
   }
 

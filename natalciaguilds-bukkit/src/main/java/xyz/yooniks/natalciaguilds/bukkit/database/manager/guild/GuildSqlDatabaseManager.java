@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import xyz.yooniks.natalciaguilds.api.database.DatabaseDataManager;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
+import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.bukkit.database.converter.DatabaseDataConverters;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildAreaImpl;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildBuilder;
@@ -35,12 +37,14 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
         final GuildArea area = new GuildAreaImpl(
             LocationHelper.fromString(result.getString("area_location")),
             result.getInt("area_size"));
+        final Set<GuildMember> members = DatabaseDataConverters.MEMBERS_CONVERTER
+            .fromDatabaseColumn(result.getString("guild_members"));
 
         guilds.add(new GuildBuilder()
             .withName(name)
             .withTag(tag)
             .withArea(area)
-            .withMembers(new HashSet<>())
+            .withMembers(members)
             .build()
         );
       }
