@@ -3,44 +3,34 @@ package xyz.yooniks.natalciaguilds.bukkit;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.yooniks.natalciaguilds.api.NatalciaGuilds;
 import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
-import xyz.yooniks.natalciaguilds.bukkit.command.GuildCommand;
-import xyz.yooniks.natalciaguilds.bukkit.command.argument.GuildCommandArgumentManager;
-import xyz.yooniks.natalciaguilds.bukkit.command.argument.impl.GuildCommandArgumentManagerImpl;
-import xyz.yooniks.natalciaguilds.bukkit.command.argument.impl.GuildCreateCommandArgument;
-import xyz.yooniks.natalciaguilds.bukkit.database.manager.guild.GuildFlatDataManager;
+import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandManager;
+import xyz.yooniks.natalciaguilds.bukkit.command.basic.impl.GuildCommandManagerImpl;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildManagerImpl;
-import xyz.yooniks.natalciaguilds.bukkit.helper.CommandHelper;
 import xyz.yooniks.natalciaguilds.bukkit.helper.URIHelper;
 
 public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGuilds {
 
   private GuildManager guildManager;
-  private GuildCommandArgumentManager guildCommandArgumentManager;
+  private GuildCommandManager guildCommandManager;
 
   @Override
   public void onEnable() {
-    this.guildManager = new GuildManagerImpl();
-    //set database manager and load guilds
-    this.guildManager.setDatabaseManager(new GuildFlatDataManager());
-    this.guildManager.addGuilds(this.guildManager.getDatabaseManager().findAll());
-
-    this.guildCommandArgumentManager = new GuildCommandArgumentManagerImpl();
-    this.guildCommandArgumentManager.addArgument(new GuildCreateCommandArgument("create", "zaloz"));
-
-    //main command, others are inside main command as arguments
-    CommandHelper.registerCommand("g", new GuildCommand(
-        this.guildCommandArgumentManager,
-        "guild",
-        "Glowna komenda od gildii",
-        "/g",
-        Arrays.asList("guilds", "gildie", "factions", "g", "funnyguilds"))
-    );
-
     this.printVersion();
+
+    final long start = System.currentTimeMillis();
+
+    this.guildManager = new GuildManagerImpl();
+    this.guildCommandManager = new GuildCommandManagerImpl();
+
+    final NatalciaGuildsInitializer initializer = new NatalciaGuildsInitializer(this);
+    initializer.initialize();
+
+    final long end = System.currentTimeMillis() - start;
+    this.getLogger().info("Successfully loaded plugin in " + end + "ms!");
+
   }
 
   @Override
@@ -52,10 +42,13 @@ public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGu
     return guildManager;
   }
 
+  public GuildCommandManager getGuildCommandManager() {
+    return guildCommandManager;
+  }
+
   private void printVersion() {
     try {
-      final String url = "https://github.com/yooniks/NatalciaGuilds";
-      final String availableVersion = URIHelper.readContent(new URI(url + "/version.txt"));
+      final String availableVersion = URIHelper.readContent(new URI(URIHelper.VERSION_URL));
       final String currentVersion = this.getDescription().getVersion();
       if (availableVersion.equalsIgnoreCase(currentVersion)) {
         this.getLogger().info("Your server uses the newest version! =)");
@@ -64,7 +57,7 @@ public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGu
         this.getLogger().warning(String.format(
             "Your server uses old version.. "
                 + "Available version: %s, current version: %s, download the newest version at %s",
-            availableVersion, currentVersion, url + "/releases")
+            availableVersion, currentVersion, URIHelper.RELEASES_URL)
         );
       }
     }

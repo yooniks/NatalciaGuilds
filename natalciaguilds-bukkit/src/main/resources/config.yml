@@ -1,0 +1,8 @@
+guild:
+  items-create:
+    item1:
+      material: EMERALD_BLOCK
+      amount: 32
+    item2:
+      material: DIAMOND_BLOCK
+      amount: 32
