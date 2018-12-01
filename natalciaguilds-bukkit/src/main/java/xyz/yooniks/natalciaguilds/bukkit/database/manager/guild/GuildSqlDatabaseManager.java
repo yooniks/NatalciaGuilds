@@ -5,13 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import xyz.yooniks.natalciaguilds.api.database.DatabaseDataManager;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
+import xyz.yooniks.natalciaguilds.bukkit.config.SettingsConfig;
 import xyz.yooniks.natalciaguilds.bukkit.database.converter.DatabaseDataConverters;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildAreaImpl;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildBuilder;
@@ -24,6 +26,9 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
   public GuildSqlDatabaseManager(Connection connection) {
     this.connection = connection;
   }
+
+  private final ExecutorService executorService = Executors.newFixedThreadPool(
+      SettingsConfig.CONCURRENCY$THREADS);
 
   @Override
   public List<Guild> findAll() {
@@ -57,19 +62,23 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
 
   @Override
   public void remove(Guild guild) {
-    try (final PreparedStatement statement = this.connection.prepareStatement("DELETE FROM guilds WHERE guild_tag=?")) {
-      statement.setString(1, guild.getTag());
-      statement.execute();
-    }
-    catch (Exception ex) {
-      ex.printStackTrace();
-    }
+    this.executorService.submit(() -> {
+      try (final PreparedStatement statement = this.connection
+          .prepareStatement("DELETE FROM guilds WHERE guild_tag=?")) {
+        statement.setString(1, guild.getTag());
+        statement.execute();
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
+    });
   }
 
   @Override
   public void update(Guild guild) {
-    try (final PreparedStatement statement = this.connection.prepareStatement("INSERT INTO guilds "
-            + "VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE guild_tag=?")) {
+    this.executorService.submit(() -> {
+      try (final PreparedStatement statement = this.connection
+          .prepareStatement("INSERT INTO guilds "
+              + "VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE guild_tag=?")) {
       /*
       1. tag
       2. name
@@ -77,19 +86,21 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
       4. area size
       5. members with owner
        */
-      statement.setString(1, guild.getTag());
-      statement.setString(2, guild.getName());
-      final GuildArea area = guild.getArea();
-      statement.setString(3, LocationHelper.toString(area.asImpl((GuildAreaImpl)area).getCenter()));
-      statement.setInt(4, area.getSize());
-      statement.setString(5, DatabaseDataConverters.MEMBERS_CONVERTER.toDatabaseColumn(guild.getMembers()));
+        statement.setString(1, guild.getTag());
+        statement.setString(2, guild.getName());
+        final GuildArea area = guild.getArea();
+        statement
+            .setString(3, LocationHelper.toString(area.asImpl((GuildAreaImpl) area).getCenter()));
+        statement.setInt(4, area.getSize());
+        statement.setString(5,
+            DatabaseDataConverters.MEMBERS_CONVERTER.toDatabaseColumn(guild.getMembers()));
 
-      statement.setString(6, guild.getTag());
-      statement.execute();
-    }
-    catch (Exception ex) {
-      ex.printStackTrace();
-    }
+        statement.setString(6, guild.getTag());
+        statement.execute();
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
+    });
   }
 
 }

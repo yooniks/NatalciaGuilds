@@ -7,9 +7,9 @@ import java.net.URI;
 
 public final class URIHelper {
 
-  public static final String RELEASES_URL = "https://github.com/yooniks/NatalciaGuilds/releases";
-  public static final String VERSION_URL = "https://github.com/yooniks/NatalciaGuilds/version.txt";
-  public static final String MAIN_URL = "https://github.com/yooniks/NatalciaGuilds";
+  private static final String MAIN_URL = "https://github.com/yooniks/NatalciaGuilds";
+  public static final String RELEASES_URL = MAIN_URL + "/releases";
+  public static final String VERSION_URL = MAIN_URL + "/version.txt";
 
 
   public static String readContent(URI uri) throws IOException {

@@ -20,16 +20,15 @@ public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGu
   public void onEnable() {
     this.printVersion();
 
-    final long start = System.currentTimeMillis();
-
     this.guildManager = new GuildManagerImpl();
     this.guildCommandManager = new GuildCommandManagerImpl();
 
-    final NatalciaGuildsInitializer initializer = new NatalciaGuildsInitializer(this);
-    initializer.initialize();
+    this.getLogger().info("Loading plugin.. ");
 
-    final long end = System.currentTimeMillis() - start;
-    this.getLogger().info("Successfully loaded plugin in " + end + "ms!");
+    final NatalciaGuildsInitializer initializer = new NatalciaGuildsInitializer(this);
+    final long time = initializer.initialize();
+
+    this.getLogger().info("Loaded plugin in " + time + "ms!");
 
   }
 

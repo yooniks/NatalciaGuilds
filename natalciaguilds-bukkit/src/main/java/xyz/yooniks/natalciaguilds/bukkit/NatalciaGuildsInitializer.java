@@ -2,54 +2,35 @@ package xyz.yooniks.natalciaguilds.bukkit;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import jdk.internal.reflect.Reflection;
-import org.bukkit.event.Listener;
-import org.reflections.Reflections;
-import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
-import xyz.yooniks.natalciaguilds.bukkit.command.GuildCommand;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandArgumentExecutor;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandManager;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.impl.GuildCreateCommandArgument;
-import xyz.yooniks.natalciaguilds.bukkit.database.manager.guild.GuildFlatDataManager;
-import xyz.yooniks.natalciaguilds.bukkit.listener.PlayerJoinListener;
+import java.util.logging.Logger;
+import xyz.yooniks.natalciaguilds.bukkit.initializer.Initializer;
+import xyz.yooniks.natalciaguilds.bukkit.initializer.impl.CommandInitializer;
+import xyz.yooniks.natalciaguilds.bukkit.initializer.impl.GuildInitializer;
 
-class NatalciaGuildsInitializer {
+class NatalciaGuildsInitializer implements Initializer {
 
-  private final NatalciaGuildsPlugin plugin;
+  private final Logger logger;
+  private final List<Initializer> initializers;
 
   NatalciaGuildsInitializer(NatalciaGuildsPlugin plugin) {
-    this.plugin = plugin;
-  }
-
-  void initialize() {
-    this.initGuildManager();
-    this.initCommands();
-    this.registerListeners(new PlayerJoinListener());
-  }
-
-  private void initGuildManager() {
-    final GuildManager guildManager = this.plugin.getGuildManager();
-    //set database manager and load guilds
-    guildManager.setDatabaseManager(new GuildFlatDataManager());
-    guildManager.addGuilds(guildManager.getDatabaseManager().findAll());
-  }
-
-  private void initCommands() {
-    final GuildCommandManager commandManager = this.plugin.getGuildCommandManager();
-    //main command, others are inside main command as arguments
-    commandManager.setCommand(new GuildCommand(commandManager));
-
-    //init commands in package xyz.yooniks...command.basic.impl
-    final Reflections reflections = new Reflections("xyz.yooniks.natalciaguilds.bukkit.command.basic.impl");
-    reflections.getSubTypesOf(GuildCommandArgumentExecutor.class)
-        .forEach(commandManager::addArgument);
-  }
-
-  private void registerListeners(Listener... listeners) {
-    Arrays.stream(listeners).forEach(
-        listener -> this.plugin.getServer().getPluginManager().registerEvents(listener, plugin)
+    this.initializers = Arrays.asList(
+        new CommandInitializer(plugin.getGuildCommandManager()),
+        new GuildInitializer(plugin.getGuildManager())
     );
+    this.logger = plugin.getLogger();
+  }
+
+  @Override
+  public long initialize() {
+    final long start = System.currentTimeMillis();
+
+    this.initializers.forEach(initializer -> {
+      final long time = initializer.initialize();
+      logger.info(
+          String.format("%s made his task in: %d", initializer.getClass().getSimpleName(), time));
+    });
+
+    return System.currentTimeMillis() - start;
   }
 
 }

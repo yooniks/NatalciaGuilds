@@ -13,6 +13,7 @@ import xyz.yooniks.natalciaguilds.api.database.DatabaseDataManager;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.bukkit.NatalciaGuildsPlugin;
+import xyz.yooniks.natalciaguilds.bukkit.config.SettingsConfig;
 import xyz.yooniks.natalciaguilds.bukkit.database.converter.DatabaseDataConverters;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildAreaImpl;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildBuilder;
@@ -23,7 +24,8 @@ public class GuildFlatDataManager implements DatabaseDataManager<Guild> {
   private final File mainDir = new File(NatalciaGuildsPlugin.getInstance().getDataFolder(), "/data");
   private final File guildsDir = new File(this.mainDir, "/guilds");
 
-  private final ExecutorService executorService = Executors.newFixedThreadPool(1);
+  private final ExecutorService executorService = Executors.newFixedThreadPool(
+      SettingsConfig.CONCURRENCY$THREADS);
 
   @Override
   public List<Guild> findAll() {
