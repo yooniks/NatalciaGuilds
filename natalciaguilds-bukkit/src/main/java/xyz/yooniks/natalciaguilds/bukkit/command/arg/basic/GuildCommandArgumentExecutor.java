@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.command.basic;
+package xyz.yooniks.natalciaguilds.bukkit.command.arg.basic;
 
 import org.bukkit.command.CommandSender;
 

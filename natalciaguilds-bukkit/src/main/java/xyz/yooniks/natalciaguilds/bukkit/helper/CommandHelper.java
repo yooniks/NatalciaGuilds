@@ -9,7 +9,7 @@ public final class CommandHelper {
 
   private static CommandMap commandMap;
 
-  //maybe i will make something else but now it is the best solution
+  //maybe i will make something else but now it's the best solution
   static {
     final Field field;
     try {
@@ -21,11 +21,11 @@ public final class CommandHelper {
     }
   }
 
-  public static void registerCommand(String commandName, Command command) {
-    commandMap.register(commandName, command);
+  private CommandHelper() {
   }
 
-  private CommandHelper() {
+  public static void registerCommand(String commandName, Command command) {
+    commandMap.register(commandName, command);
   }
 
 }

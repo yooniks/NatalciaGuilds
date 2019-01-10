@@ -3,6 +3,8 @@ package xyz.yooniks.natalciaguilds.bukkit.command.basic;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.bukkit.command.Command;
+import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgument;
+import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgumentExecutor;
 
 public interface GuildCommandManager {
 
@@ -11,8 +13,9 @@ public interface GuildCommandManager {
 
   List<GuildCommandArgument> getAllArguments();
 
-  void setCommand(Command command);
+  void registerCommand(Command command);
 
-  void addArgument(Class<? extends GuildCommandArgumentExecutor> executableGuildCommand);
+  void addGuildCommandArgument(
+      Class<? extends GuildCommandArgumentExecutor> executableGuildCommand);
 
 }

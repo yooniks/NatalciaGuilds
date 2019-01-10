@@ -14,16 +14,16 @@ public class RankingUpdateEvent extends Event {
     this.ranking = ranking;
   }
 
+  public static HandlerList getHandlerList() {
+    return handlerList;
+  }
+
   public Ranking getRanking() {
     return ranking;
   }
 
   @Override
   public HandlerList getHandlers() {
-    return handlerList;
-  }
-
-  public static HandlerList getHandlerList() {
     return handlerList;
   }
 

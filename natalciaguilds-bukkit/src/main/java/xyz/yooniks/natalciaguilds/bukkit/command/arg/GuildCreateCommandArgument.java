@@ -1,11 +1,11 @@
-package xyz.yooniks.natalciaguilds.bukkit.command.basic.impl;
+package xyz.yooniks.natalciaguilds.bukkit.command.arg;
 
 import org.bukkit.command.CommandSender;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandArgumentExecutor;
 import xyz.yooniks.natalciaguilds.api.command.GuildCommandArgumentInfo;
+import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgumentExecutor;
 
 @GuildCommandArgumentInfo(
-    names = { "zaloz", "create" },
+    names = {"zaloz", "create"},
     usage = "zaloz [tag] [nazwa]"
 )
 public class GuildCreateCommandArgument implements GuildCommandArgumentExecutor {

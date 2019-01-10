@@ -7,10 +7,13 @@ import java.net.URI;
 
 public final class URIHelper {
 
-  private static final String MAIN_URL = "https://github.com/yooniks/NatalciaGuilds";
-  public static final String RELEASES_URL = MAIN_URL + "/releases";
-  public static final String VERSION_URL = MAIN_URL + "/version.txt";
+  private static final String MAIN_URL = "https://github.com/yooniks/NatalciaGuilds/%s";
+  public static final String RELEASES_URL = String.format(MAIN_URL, "releases");
+  public static final String VERSION_URL = String.format(MAIN_URL, "version.txt");
 
+
+  private URIHelper() {
+  }
 
   public static String readContent(URI uri) throws IOException {
     final StringBuilder content = new StringBuilder();
@@ -27,9 +30,6 @@ public final class URIHelper {
 
     reader.close();
     return content.toString();
-  }
-
-  private URIHelper() {
   }
 
 }

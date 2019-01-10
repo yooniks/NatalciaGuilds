@@ -1,13 +1,12 @@
-package xyz.yooniks.natalciaguilds.bukkit.guild;
+package xyz.yooniks.natalciaguilds.bukkit.guild.area;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.bukkit.helper.GuildHelper;
 
-public class GuildAreaImpl implements GuildArea {
+public class GuildAreaImpl implements GuildAreaBukkit {
 
   private final Location center;
   private int size;
@@ -41,6 +40,7 @@ public class GuildAreaImpl implements GuildArea {
     this.size = size;
   }
 
+  @Override
   public Location getCenter() {
     return center;
   }

@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.command.basic;
+package xyz.yooniks.natalciaguilds.bukkit.command.arg.basic;
 
 public class GuildCommandArgument {
 
@@ -9,7 +9,8 @@ public class GuildCommandArgument {
 
   private final GuildCommandArgumentExecutor executor;
 
-  public GuildCommandArgument(String[] names, String usage, boolean playerOnly, int minArgs, GuildCommandArgumentExecutor executor) {
+  public GuildCommandArgument(String[] names, String usage, boolean playerOnly, int minArgs,
+      GuildCommandArgumentExecutor executor) {
     this.names = names;
     this.usage = usage;
     this.playerOnly = playerOnly;

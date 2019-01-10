@@ -12,8 +12,4 @@ public interface GuildArea {
 
   void update();
 
-  default <T extends GuildArea> T asImpl(T impl) {
-    return impl;
-  }
-
 }

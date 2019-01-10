@@ -10,11 +10,11 @@ import javax.annotation.Nullable;
 import org.bukkit.Location;
 import xyz.yooniks.natalciaguilds.api.database.DatabaseDataManager;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
-import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
+import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaBukkit;
 import xyz.yooniks.natalciaguilds.bukkit.helper.GuildHelper;
 
-public class GuildManagerImpl implements GuildManager {
+public class GuildManagerImpl implements GuildManagerBukkit {
 
   private final Map<String, Guild> guilds = new HashMap<>();
   private DatabaseDataManager<Guild> databaseManager;
@@ -79,10 +79,11 @@ public class GuildManagerImpl implements GuildManager {
   }
 
   @Nullable
+  @Override
   public Guild findByLocation(Location location) {
     return this.guilds.values()
         .stream()
-        .filter(guild -> this.isInArea(guild, location))
+        .filter(guild -> this.isInArea((GuildAreaBukkit) guild.getArea(), location))
         .findFirst()
         .orElse(null);
   }
@@ -91,8 +92,8 @@ public class GuildManagerImpl implements GuildManager {
     return guild.getMembers().stream().map(GuildMember::getIdentifier).collect(Collectors.toList());
   }
 
-  private boolean isInArea(Guild guild, Location location) {
-    return GuildHelper.isInArea(guild.getArea(), guild.getArea().asImpl((GuildAreaImpl)guild.getArea()).getCenter(), location);
+  private boolean isInArea(GuildAreaBukkit area, Location location) {
+    return GuildHelper.isInArea(area, area.getCenter(), location);
   }
 
 }

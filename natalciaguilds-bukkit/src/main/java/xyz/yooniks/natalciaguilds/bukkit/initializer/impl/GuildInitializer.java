@@ -13,13 +13,9 @@ public class GuildInitializer implements Initializer {
   }
 
   @Override
-  public long initialize() {
-    final long start = System.currentTimeMillis();
-
-    this.guildManager.setDatabaseManager(new GuildFlatDataManager());
+  public void initialize() {
+    this.guildManager.setDatabaseManager(new GuildFlatDataManager(null));
     this.guildManager.addGuilds(this.guildManager.getDatabaseManager().findAll());
-
-    return System.currentTimeMillis() - start;
   }
 
 }

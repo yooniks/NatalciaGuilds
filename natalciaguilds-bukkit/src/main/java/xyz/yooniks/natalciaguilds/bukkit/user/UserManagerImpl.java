@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import xyz.yooniks.natalciaguilds.api.ranking.impl.UserRanking;
 import xyz.yooniks.natalciaguilds.api.user.User;
 import xyz.yooniks.natalciaguilds.api.user.UserManager;
 

@@ -20,9 +20,13 @@ public interface Guild {
 
   void removeMember(GuildMember member);
 
+  boolean isMember(GuildMember member);
+
   GuildMember getOwner();
 
   Ranking getRanking();
+
+  GuildInfo getInfo();
 
   boolean hasPermission(GuildMember member, GuildPermission permission);
 

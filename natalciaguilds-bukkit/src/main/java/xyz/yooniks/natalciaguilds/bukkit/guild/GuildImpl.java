@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
+import xyz.yooniks.natalciaguilds.api.guild.GuildInfo;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
@@ -21,6 +22,7 @@ public class GuildImpl implements Guild {
 
   private final Set<GuildMember> members;
   private final Multimap<UUID, GuildPermission> permissions = ArrayListMultimap.create();
+  private final GuildInfo info = new GuildInfoImpl();
 
   public GuildImpl(String tag, String name, GuildArea area, Set<GuildMember> members) {
     this.tag = tag;
@@ -54,6 +56,11 @@ public class GuildImpl implements Guild {
   }
 
   @Override
+  public GuildInfo getInfo() {
+    return info;
+  }
+
+  @Override
   public Set<GuildMember> getMembers() {
     return members;
   }
@@ -66,6 +73,11 @@ public class GuildImpl implements Guild {
   @Override
   public void removeMember(GuildMember member) {
     this.members.remove(member);
+  }
+
+  @Override
+  public boolean isMember(GuildMember member) {
+    return this.members.contains(member);
   }
 
   @Override

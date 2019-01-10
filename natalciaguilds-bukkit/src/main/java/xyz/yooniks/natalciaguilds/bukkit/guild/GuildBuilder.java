@@ -1,14 +1,12 @@
 package xyz.yooniks.natalciaguilds.bukkit.guild;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import org.apache.commons.lang.Validate;
 import xyz.yooniks.natalciaguilds.api.Buildable;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
-import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
 
 public class GuildBuilder implements Buildable<Guild> {
 

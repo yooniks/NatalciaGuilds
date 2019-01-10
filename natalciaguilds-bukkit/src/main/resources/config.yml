@@ -6,3 +6,9 @@ guild:
     item2:
       material: DIAMOND_BLOCK
       amount: 32
+tablist:
+  element:
+    header: "&6Simple header"
+    footer: "&aSimple footer"
+    slot:
+      8: "&a8 slot"

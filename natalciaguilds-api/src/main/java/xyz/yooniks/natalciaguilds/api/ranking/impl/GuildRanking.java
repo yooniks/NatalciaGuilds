@@ -44,5 +44,11 @@ public class GuildRanking implements Ranking {
         .sum() / this.guild.getMembers().size();
   }
 
+  @Override
+  public String toString() {
+    return "GuildRanking{" +
+        "guild=" + guild +
+        '}';
+  }
 
 }

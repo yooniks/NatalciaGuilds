@@ -7,9 +7,9 @@ import java.util.List;
 import javax.annotation.Nullable;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.Command;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandArgument;
 import xyz.yooniks.natalciaguilds.api.command.GuildCommandArgumentInfo;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandArgumentExecutor;
+import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgument;
+import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgumentExecutor;
 import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandManager;
 import xyz.yooniks.natalciaguilds.bukkit.helper.CommandHelper;
 
@@ -27,13 +27,15 @@ public class GuildCommandManagerImpl implements GuildCommandManager {
   }
 
   @Override
-  public void setCommand(Command command) {
-    CommandHelper.registerCommand("guild", command);
+  public void registerCommand(Command command) {
+    CommandHelper.registerCommand(command.getName(), command);
   }
 
   @Override
-  public void addArgument(Class<? extends GuildCommandArgumentExecutor> executableGuildCommand) {
-    final GuildCommandArgumentInfo argumentInfo = executableGuildCommand.getAnnotation(GuildCommandArgumentInfo.class);
+  public void addGuildCommandArgument(
+      Class<? extends GuildCommandArgumentExecutor> executableGuildCommand) {
+    final GuildCommandArgumentInfo argumentInfo = executableGuildCommand
+        .getAnnotation(GuildCommandArgumentInfo.class);
     Validate.notNull(argumentInfo, "Annonation with command info cannot be null!");
 
     try {
@@ -46,9 +48,8 @@ public class GuildCommandManagerImpl implements GuildCommandManager {
           executor
       );
 
-      arguments.add(commandArgument);
-    }
-    catch (Exception ex) {
+      this.arguments.add(commandArgument);
+    } catch (Exception ex) {
       ex.printStackTrace();
     }
   }

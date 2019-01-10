@@ -7,28 +7,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import xyz.yooniks.natalciaguilds.api.database.DatabaseDataManager;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
-import xyz.yooniks.natalciaguilds.bukkit.config.SettingsConfig;
 import xyz.yooniks.natalciaguilds.bukkit.database.converter.DatabaseDataConverters;
-import xyz.yooniks.natalciaguilds.bukkit.guild.GuildAreaImpl;
+import xyz.yooniks.natalciaguilds.bukkit.database.updater.DataUpdater;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildBuilder;
-import xyz.yooniks.natalciaguilds.bukkit.helper.LocationHelper;
+import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaBukkit;
+import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaImpl;
 
 public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
 
   private final Connection connection;
+  private final DataUpdater dataUpdater;
 
-  public GuildSqlDatabaseManager(Connection connection) {
+  public GuildSqlDatabaseManager(Connection connection, DataUpdater dataUpdater) {
     this.connection = connection;
+    this.dataUpdater = dataUpdater;
   }
 
-  private final ExecutorService executorService = Executors.newFixedThreadPool(
-      SettingsConfig.CONCURRENCY$THREADS);
+  @Override
+  public Guild load(Guild guild) {
+    return null;
+  }
 
   @Override
   public List<Guild> findAll() {
@@ -40,7 +42,8 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
         final String name = result.getString("guild_name");
         final String tag = result.getString("guild_tag");
         final GuildArea area = new GuildAreaImpl(
-            LocationHelper.fromString(result.getString("area_location")),
+            DatabaseDataConverters.LOCATION_CONVERTER
+                .fromDatabaseColumn(result.getString("area_location")),
             result.getInt("area_size"));
         final Set<GuildMember> members = DatabaseDataConverters.MEMBERS_CONVERTER
             .fromDatabaseColumn(result.getString("guild_members"));
@@ -62,7 +65,7 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
 
   @Override
   public void remove(Guild guild) {
-    this.executorService.submit(() -> {
+    this.dataUpdater.execute(() -> {
       try (final PreparedStatement statement = this.connection
           .prepareStatement("DELETE FROM guilds WHERE guild_tag=?")) {
         statement.setString(1, guild.getTag());
@@ -75,7 +78,7 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
 
   @Override
   public void update(Guild guild) {
-    this.executorService.submit(() -> {
+    this.dataUpdater.execute(() -> {
       try (final PreparedStatement statement = this.connection
           .prepareStatement("INSERT INTO guilds "
               + "VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE guild_tag=?")) {
@@ -88,9 +91,10 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
        */
         statement.setString(1, guild.getTag());
         statement.setString(2, guild.getName());
-        final GuildArea area = guild.getArea();
+        final GuildAreaBukkit area = (GuildAreaBukkit) guild.getArea();
         statement
-            .setString(3, LocationHelper.toString(area.asImpl((GuildAreaImpl) area).getCenter()));
+            .setString(3,
+                DatabaseDataConverters.LOCATION_CONVERTER.toDatabaseColumn(area.getCenter()));
         statement.setInt(4, area.getSize());
         statement.setString(5,
             DatabaseDataConverters.MEMBERS_CONVERTER.toDatabaseColumn(guild.getMembers()));

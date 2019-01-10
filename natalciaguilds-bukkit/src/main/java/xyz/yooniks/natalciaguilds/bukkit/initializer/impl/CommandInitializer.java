@@ -1,7 +1,7 @@
 package xyz.yooniks.natalciaguilds.bukkit.initializer.impl;
 
 import org.reflections.Reflections;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandArgumentExecutor;
+import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgumentExecutor;
 import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandManager;
 import xyz.yooniks.natalciaguilds.bukkit.initializer.Initializer;
 
@@ -15,15 +15,11 @@ public class CommandInitializer implements Initializer {
   }
 
   @Override
-  public long initialize() {
-    final long start = System.currentTimeMillis();
-
+  public void initialize() {
     final Reflections reflections = new Reflections(
         "xyz.yooniks.natalciaguilds.bukkit.command.basic.impl");
     reflections.getSubTypesOf(GuildCommandArgumentExecutor.class)
-        .forEach(commandManager::addArgument);
-
-    return System.currentTimeMillis() - start;
+        .forEach(this.commandManager::addGuildCommandArgument);
   }
 
 }

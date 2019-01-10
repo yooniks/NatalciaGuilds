@@ -4,7 +4,7 @@ import java.util.Arrays;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandArgument;
+import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgument;
 import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandManager;
 import xyz.yooniks.natalciaguilds.bukkit.config.MessagesConfig;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper;
@@ -14,7 +14,8 @@ public class GuildCommand extends Command {
   private final GuildCommandManager commandArgumentManager;
 
   public GuildCommand(GuildCommandManager commandArgumentManager) {
-    super("guild", "Glowna komenda od gildii", "/g", Arrays.asList("guilds", "gildie", "factions", "g", "funnyguilds"));
+    super("guild", "Glowna komenda od gildii", "/g",
+        Arrays.asList("guilds", "gildie", "factions", "g", "funnyguilds"));
     this.commandArgumentManager = commandArgumentManager;
   }
 
@@ -25,9 +26,11 @@ public class GuildCommand extends Command {
       return true;
     }
     final String commandArgumentName = args[0];
-    final GuildCommandArgument commandArgument = this.commandArgumentManager.findByName(commandArgumentName);
+    final GuildCommandArgument commandArgument = this.commandArgumentManager
+        .findByName(commandArgumentName);
     if (commandArgument == null) {
-      MessageHelper.sendMessage(sender, "&cArgument &6" + commandArgumentName + " &cnie istnieje! &6/g");
+      MessageHelper
+          .sendMessage(sender, "&cArgument &6" + commandArgumentName + " &cnie istnieje! &6/g");
       return true;
     }
 

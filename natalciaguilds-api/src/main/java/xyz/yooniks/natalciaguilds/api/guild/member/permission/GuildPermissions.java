@@ -20,6 +20,16 @@ public final class GuildPermissions {
       .withName("Usuwanie czlonkow gildii")
       .build();
 
+  public static final GuildPermission PLACE_BLOCKS = new GuildPermissionBuilder()
+      .withId(ID_INCREMENTER.getAndIncrement())
+      .withName("Kladzenie blokow na terenie gildii")
+      .build();
+
+  public static final GuildPermission BREAK_BLOCKS = new GuildPermissionBuilder()
+      .withId(ID_INCREMENTER.getAndIncrement())
+      .withName("Rozwalanie blokow na terenie gildii")
+      .build();
+
   public static final GuildPermission OWNER = new GuildPermissionBuilder()
       .withId(ID_INCREMENTER.getAndIncrement())
       .withName("Zalozyciel gildii")

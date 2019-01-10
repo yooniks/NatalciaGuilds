@@ -44,4 +44,13 @@ public class UserRanking implements Ranking {
     this.deaths = deaths;
   }
 
+  @Override
+  public String toString() {
+    return "UserRanking{" +
+        "points=" + points +
+        ", kills=" + kills +
+        ", deaths=" + deaths +
+        '}';
+  }
+
 }
