@@ -4,3 +4,8 @@ main: 'xyz.yooniks.natalciaguilds.bukkit.NatalciaGuildsPlugin'
 authors: [yooniks]
 description: 'Simple spigot plugin implementation for NatalciaGuilds'
 website: 'www.youtube.com/c/Enchanted3'
+
+softdepend:
+- PlaceHolderAPI
+loadbefore:
+- PlaceHolderAPI
