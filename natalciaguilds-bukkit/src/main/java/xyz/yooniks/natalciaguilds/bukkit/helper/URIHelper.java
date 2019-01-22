@@ -29,6 +29,7 @@ public final class URIHelper {
     }
 
     reader.close();
+
     return content.toString();
   }
 

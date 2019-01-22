@@ -32,20 +32,17 @@ public class GuildCommandManagerImpl implements GuildCommandManager {
   }
 
   @Override
-  public void addGuildCommandArgument(
-      Class<? extends GuildCommandArgumentExecutor> executableGuildCommand) {
-    final GuildCommandArgumentInfo argumentInfo = executableGuildCommand
+  public void addGuildCommandArgument(GuildCommandArgumentExecutor executableArgument) {
+    final GuildCommandArgumentInfo argumentInfo = executableArgument.getClass()
         .getAnnotation(GuildCommandArgumentInfo.class);
     Validate.notNull(argumentInfo, "Annonation with command info cannot be null!");
 
     try {
-      final GuildCommandArgumentExecutor executor = executableGuildCommand
-          .getDeclaredConstructor().newInstance();
 
       final GuildCommandArgument commandArgument = new GuildCommandArgument(
           argumentInfo.names(), argumentInfo.usage(),
           argumentInfo.playerOnly(), argumentInfo.minArgs(),
-          executor
+          executableArgument
       );
 
       this.arguments.add(commandArgument);

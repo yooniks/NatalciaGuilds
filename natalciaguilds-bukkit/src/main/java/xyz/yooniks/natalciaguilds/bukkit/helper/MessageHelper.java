@@ -7,9 +7,6 @@ import org.bukkit.command.CommandSender;
 
 public final class MessageHelper {
 
-  private MessageHelper() {
-  }
-
   public static String colored(String text) {
     return ChatColor.translateAlternateColorCodes('&', text);
   }
@@ -28,7 +25,7 @@ public final class MessageHelper {
     texts.forEach(text -> MessageHelper.sendMessage(sender, text));
   }
 
-  public static class MessageBuilder {
+  public static final class MessageBuilder {
 
     String text;
 
@@ -46,4 +43,8 @@ public final class MessageHelper {
       return this.text;
     }
   }
+
+  private MessageHelper() {
+  }
+
 }

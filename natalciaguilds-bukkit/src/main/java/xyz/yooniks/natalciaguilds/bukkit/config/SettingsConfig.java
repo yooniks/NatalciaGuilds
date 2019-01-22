@@ -11,6 +11,7 @@ public class SettingsConfig extends Config {
   public static int GUILD$CREATE$TAG_MAX = 4;
   public static int GUILD$CREATE$NAME_MIN = 6;
   public static int GUILD$CREATE$NAME_MAX = 22;
+  public static int GUILD$CREATE$START_SIZE = 20;
 
   public SettingsConfig(File file, Class<?> clazz) {
     super(file, clazz);

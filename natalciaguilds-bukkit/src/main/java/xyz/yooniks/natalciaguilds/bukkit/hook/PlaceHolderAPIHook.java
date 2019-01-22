@@ -4,6 +4,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
 import xyz.yooniks.natalciaguilds.api.user.User;
 import xyz.yooniks.natalciaguilds.bukkit.NatalciaGuildsPlugin;
 
@@ -62,10 +63,17 @@ public class PlaceHolderAPIHook implements PluginHook {
       }
 
       final User user = this.plugin.getUserManager().createUser(player.getUniqueId());
-      if (identifier.equalsIgnoreCase("points")) {
-        return String.valueOf(user.getRanking().getPoints());
-      }
 
+      final Ranking ranking = user.getRanking();
+      if (identifier.equalsIgnoreCase("points")) {
+        return String.valueOf(ranking.getPoints());
+      } else if (identifier.equalsIgnoreCase("kills")) {
+        return String.valueOf(ranking.getKills());
+      } else if (identifier.equalsIgnoreCase("deaths")) {
+        return String.valueOf(ranking.getDeaths());
+      } else if (identifier.equalsIgnoreCase("kd")) {
+        return String.valueOf(ranking.calculateKDRatio());
+      }
       return "";
     }
 

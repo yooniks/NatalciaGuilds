@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.initializer.impl;
+package xyz.yooniks.natalciaguilds.bukkit.initializer;
 
 import java.io.File;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import xyz.yooniks.natalciaguilds.bukkit.config.MessagesConfig;
 import xyz.yooniks.natalciaguilds.bukkit.config.SettingsConfig;
 import xyz.yooniks.natalciaguilds.bukkit.config.system.Config;
 import xyz.yooniks.natalciaguilds.bukkit.config.system.ConfigHelper;
-import xyz.yooniks.natalciaguilds.bukkit.initializer.Initializer;
 
 public class ConfigInitializer implements Initializer {
 

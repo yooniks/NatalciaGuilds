@@ -1,9 +1,8 @@
-package xyz.yooniks.natalciaguilds.bukkit.initializer.impl;
+package xyz.yooniks.natalciaguilds.bukkit.initializer;
 
 import java.util.Objects;
 import org.reflections.Reflections;
 import xyz.yooniks.natalciaguilds.bukkit.hook.PluginHook;
-import xyz.yooniks.natalciaguilds.bukkit.initializer.Initializer;
 
 public class PluginHookInitializer implements Initializer {
 
@@ -21,8 +20,7 @@ public class PluginHookInitializer implements Initializer {
           }
           return null;
         })
-        .filter(Objects::nonNull)
-        .filter(PluginHook::shouldBeLoaded)
+        .filter(hook -> Objects.nonNull(hook) && hook.shouldBeLoaded())
         .forEach(PluginHook::initialize);
   }
 

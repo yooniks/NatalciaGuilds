@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.element.tablist.impl;
+package xyz.yooniks.natalciaguilds.bukkit.element.tablist;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import org.bukkit.entity.Player;
-import xyz.yooniks.natalciaguilds.bukkit.element.tablist.Tablist;
 
 public class ProtocolLibTablist implements Tablist {
 

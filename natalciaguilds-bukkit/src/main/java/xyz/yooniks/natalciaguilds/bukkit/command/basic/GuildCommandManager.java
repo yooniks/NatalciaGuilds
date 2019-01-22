@@ -15,7 +15,6 @@ public interface GuildCommandManager {
 
   void registerCommand(Command command);
 
-  void addGuildCommandArgument(
-      Class<? extends GuildCommandArgumentExecutor> executableGuildCommand);
+  void addGuildCommandArgument(GuildCommandArgumentExecutor executableArgument);
 
 }

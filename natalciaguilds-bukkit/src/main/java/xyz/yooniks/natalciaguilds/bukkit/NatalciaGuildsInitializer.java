@@ -1,32 +1,20 @@
 package xyz.yooniks.natalciaguilds.bukkit;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 import xyz.yooniks.natalciaguilds.bukkit.initializer.Initializer;
-import xyz.yooniks.natalciaguilds.bukkit.initializer.impl.CommandInitializer;
-import xyz.yooniks.natalciaguilds.bukkit.initializer.impl.ConfigInitializer;
-import xyz.yooniks.natalciaguilds.bukkit.initializer.impl.GuildInitializer;
-import xyz.yooniks.natalciaguilds.bukkit.initializer.impl.ListenerInitializer;
-import xyz.yooniks.natalciaguilds.bukkit.initializer.impl.TablistInitializer;
 
-class NatalciaGuildsInitializer implements Initializer {
+class NatalciaGuildsInitializer {
 
   private final Logger logger;
-  private final List<Initializer> initializers;
+  private final Set<Initializer> initializers = new HashSet<>();
 
-  NatalciaGuildsInitializer(NatalciaGuildsPlugin plugin) {
-    this.initializers = Arrays.asList(
-        new CommandInitializer(plugin.getGuildCommandManager()),
-        new GuildInitializer(plugin.getGuildManager()),
-        new ListenerInitializer(plugin),
-        new ConfigInitializer(plugin),
-        new TablistInitializer(plugin)
-    );
-    this.logger = plugin.getLogger();
+  NatalciaGuildsInitializer(Logger logger) {
+    this.logger = logger;
   }
 
-  @Override
   public void initialize() {
     this.initializers.forEach(initializer -> {
       long time = System.currentTimeMillis();
@@ -37,6 +25,10 @@ class NatalciaGuildsInitializer implements Initializer {
           String
               .format("%s made his task in: %d ms", initializer.getClass().getSimpleName(), time));
     });
+  }
+
+  public void addInitializer(Initializer... initializers) {
+    this.initializers.addAll(Arrays.asList(initializers));
   }
 
 }

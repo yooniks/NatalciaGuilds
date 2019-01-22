@@ -11,6 +11,11 @@ import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandManager;
 import xyz.yooniks.natalciaguilds.bukkit.command.basic.impl.GuildCommandManagerImpl;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildManagerImpl;
 import xyz.yooniks.natalciaguilds.bukkit.helper.URIHelper;
+import xyz.yooniks.natalciaguilds.bukkit.initializer.CommandInitializer;
+import xyz.yooniks.natalciaguilds.bukkit.initializer.ConfigInitializer;
+import xyz.yooniks.natalciaguilds.bukkit.initializer.GuildInitializer;
+import xyz.yooniks.natalciaguilds.bukkit.initializer.ListenerInitializer;
+import xyz.yooniks.natalciaguilds.bukkit.initializer.TablistInitializer;
 import xyz.yooniks.natalciaguilds.bukkit.user.UserManagerImpl;
 
 public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGuilds {
@@ -29,7 +34,14 @@ public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGu
 
     this.getLogger().info("Loading plugin..");
 
-    new NatalciaGuildsInitializer(this).initialize();
+    final NatalciaGuildsInitializer initializer = new NatalciaGuildsInitializer(this.getLogger());
+    initializer.addInitializer(
+        new CommandInitializer(this.guildCommandManager),
+        new GuildInitializer(this.guildManager),
+        new ListenerInitializer(this),
+        new ConfigInitializer(this),
+        new TablistInitializer(this));
+    initializer.initialize();
 
     this.getLogger().info("Loaded plugin!");
   }
@@ -65,8 +77,8 @@ public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGu
         return;
       }
       this.getLogger().warning(String.format(
-          "Your server uses old version.. "
-              + "Available version: %s, current version: %s, download latest version at %s",
+          "Your server is using old version.. "
+              + "Available version: %s, current version: %s, download the latest version at %s",
           availableVersion, currentVersion, URIHelper.RELEASES_URL)
       );
     } catch (IOException | URISyntaxException ex) {

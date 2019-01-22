@@ -1,9 +1,8 @@
-package xyz.yooniks.natalciaguilds.bukkit.initializer.impl;
+package xyz.yooniks.natalciaguilds.bukkit.initializer;
 
 import java.util.Arrays;
 import org.bukkit.event.Listener;
 import xyz.yooniks.natalciaguilds.bukkit.NatalciaGuildsPlugin;
-import xyz.yooniks.natalciaguilds.bukkit.initializer.Initializer;
 import xyz.yooniks.natalciaguilds.bukkit.listener.PlayerLoadSaveListener;
 
 public class ListenerInitializer implements Initializer {

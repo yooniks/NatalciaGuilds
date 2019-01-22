@@ -1,15 +1,14 @@
-package xyz.yooniks.natalciaguilds.bukkit.initializer.impl;
+package xyz.yooniks.natalciaguilds.bukkit.initializer;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
+import xyz.yooniks.natalciaguilds.bukkit.element.tablist.ProtocolLibTablist;
 import xyz.yooniks.natalciaguilds.bukkit.element.tablist.Tablist;
 import xyz.yooniks.natalciaguilds.bukkit.element.tablist.TablistRunnable;
-import xyz.yooniks.natalciaguilds.bukkit.element.tablist.impl.ProtocolLibTablist;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper;
-import xyz.yooniks.natalciaguilds.bukkit.initializer.Initializer;
 
 public class TablistInitializer implements Initializer {
 
