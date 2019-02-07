@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.command.arg.basic;
+package xyz.yooniks.natalciaguilds.bukkit.command;
 
 public class GuildCommandArgument {
 

@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.command.arg;
+package xyz.yooniks.natalciaguilds.bukkit.command;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,7 +17,6 @@ import xyz.yooniks.natalciaguilds.api.guild.area.GuildAreaCreator;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermissions;
 import xyz.yooniks.natalciaguilds.api.user.UserManager;
-import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgumentExecutor;
 import xyz.yooniks.natalciaguilds.bukkit.config.MessagesConfig;
 import xyz.yooniks.natalciaguilds.bukkit.config.SettingsConfig;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildImpl;

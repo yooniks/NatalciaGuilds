@@ -1,5 +1,6 @@
 package xyz.yooniks.natalciaguilds.bukkit.user;
 
+import java.util.Objects;
 import java.util.UUID;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
@@ -35,6 +36,25 @@ public class UserImpl implements User {
   @Override
   public void setGuild(Guild guild) {
     this.guild = guild;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    UserImpl user = (UserImpl) o;
+    return Objects.equals(identifier, user.identifier) &&
+        Objects.equals(ranking, user.ranking) &&
+        Objects.equals(guild, user.guild);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(identifier, ranking, guild);
   }
 
 }

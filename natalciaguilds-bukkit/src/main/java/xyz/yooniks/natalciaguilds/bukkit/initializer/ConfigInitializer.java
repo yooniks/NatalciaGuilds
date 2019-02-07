@@ -20,10 +20,10 @@ public class ConfigInitializer implements Initializer {
   @Override
   public void initialize() {
     final Map<Class<? extends Config>, File> configs = new HashMap<>();
-    final File messages = new File(plugin.getDataFolder(), "messages.yml");
+    final File messages = new File(this.plugin.getDataFolder(), "messages.yml");
     configs.put(MessagesConfig.class, messages);
 
-    final File settings = new File(plugin.getDataFolder(), "settings.yml");
+    final File settings = new File(this.plugin.getDataFolder(), "settings.yml");
     configs.put(SettingsConfig.class, settings);
 
     this.registerConfigs(configs);

@@ -1,10 +1,8 @@
-package xyz.yooniks.natalciaguilds.bukkit.command.basic;
+package xyz.yooniks.natalciaguilds.bukkit.command;
 
 import java.util.List;
 import javax.annotation.Nullable;
 import org.bukkit.command.Command;
-import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgument;
-import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgumentExecutor;
 
 public interface GuildCommandManager {
 

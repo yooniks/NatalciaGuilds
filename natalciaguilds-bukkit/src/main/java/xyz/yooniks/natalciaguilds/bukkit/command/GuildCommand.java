@@ -4,8 +4,6 @@ import java.util.Arrays;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgument;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandManager;
 import xyz.yooniks.natalciaguilds.bukkit.config.MessagesConfig;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper;
 

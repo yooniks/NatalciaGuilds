@@ -1,6 +1,7 @@
 package xyz.yooniks.natalciaguilds.api.guild;
 
 import java.util.Set;
+import jdk.internal.jline.internal.Nullable;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
@@ -22,6 +23,9 @@ public interface Guild {
 
   boolean isMember(GuildMember member);
 
+  @Nullable
+  GuildMember findMemberByName(String name);
+
   GuildMember getOwner();
 
   Ranking getRanking();
@@ -30,8 +34,8 @@ public interface Guild {
 
   boolean hasPermission(GuildMember member, GuildPermission permission);
 
-  boolean removePermission(GuildMember member, GuildPermission permission);
+  void removePermission(GuildMember member, GuildPermission permission);
 
-  boolean addPermission(GuildMember member, GuildPermission permission);
+  void addPermission(GuildMember member, GuildPermission permission);
 
 }

@@ -6,4 +6,6 @@ public interface GuildPermission {
 
   int getId();
 
+  boolean isRemovable();
+
 }

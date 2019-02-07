@@ -36,4 +36,5 @@ public class GuildMemberImpl implements GuildMember {
   public void setGuild(Guild guild) {
     this.guild = guild;
   }
+
 }

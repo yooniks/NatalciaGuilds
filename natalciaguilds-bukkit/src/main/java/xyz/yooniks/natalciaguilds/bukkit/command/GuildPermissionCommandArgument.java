@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.command.arg;
+package xyz.yooniks.natalciaguilds.bukkit.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -10,7 +10,6 @@ import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermissions;
 import xyz.yooniks.natalciaguilds.api.user.User;
 import xyz.yooniks.natalciaguilds.api.user.UserManager;
-import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgumentExecutor;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper;
 
 @GuildCommandArgumentInfo(
@@ -42,7 +41,6 @@ public class GuildPermissionCommandArgument implements GuildCommandArgumentExecu
       final GuildMember member;
 
       if (args.length > 1) {
-
         final String targetName = args[1];
         member = guild.findMemberByName(targetName);
         if (member == null) {
@@ -56,11 +54,11 @@ public class GuildPermissionCommandArgument implements GuildCommandArgumentExecu
       MessageHelper.sendMessage(sender,
           "&cLista permisjii czlonka &6" + Bukkit.getOfflinePlayer(member.getIdentifier())
               .getName());
-
       GuildPermissions.PERMISSIONS.stream()
           .filter(permission -> guild.hasPermission(member, permission))
           .forEach(permission -> MessageHelper.sendMessage(sender,
               "&cId permisjii: &6" + permission.getId() + "&c, nazwa: &6" + permission.getName()));
+
     } else if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove")) {
 
       final String targetName = args[1];

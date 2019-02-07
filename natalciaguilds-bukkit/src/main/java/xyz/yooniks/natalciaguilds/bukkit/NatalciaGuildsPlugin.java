@@ -7,8 +7,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import xyz.yooniks.natalciaguilds.api.NatalciaGuilds;
 import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
 import xyz.yooniks.natalciaguilds.api.user.UserManager;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandManager;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.impl.GuildCommandManagerImpl;
+import xyz.yooniks.natalciaguilds.bukkit.command.GuildCommandManager;
+import xyz.yooniks.natalciaguilds.bukkit.command.GuildCommandManagerImpl;
 import xyz.yooniks.natalciaguilds.bukkit.guild.GuildManagerImpl;
 import xyz.yooniks.natalciaguilds.bukkit.helper.URIHelper;
 import xyz.yooniks.natalciaguilds.bukkit.initializer.CommandInitializer;
@@ -36,7 +36,7 @@ public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGu
 
     final NatalciaGuildsInitializer initializer = new NatalciaGuildsInitializer(this.getLogger());
     initializer.addInitializer(
-        new CommandInitializer(this.guildCommandManager),
+        new CommandInitializer(this),
         new GuildInitializer(this.guildManager),
         new ListenerInitializer(this),
         new ConfigInitializer(this),

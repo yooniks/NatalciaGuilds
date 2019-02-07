@@ -7,6 +7,12 @@ public class GuildPermissionBuilder implements Buildable<GuildPermission> {
 
   private String name;
   private int id;
+  private boolean removable;
+
+  public GuildPermissionBuilder removable(boolean removable) {
+    this.removable = removable;
+    return this;
+  }
 
   public GuildPermissionBuilder withId(int id) {
     this.id = id;
@@ -26,7 +32,7 @@ public class GuildPermissionBuilder implements Buildable<GuildPermission> {
     );
 
     Validate.notNull(this.name, "Name cannot be null!");
-    return new GuildPermissionImpl(this.id, this.name);
+    return new GuildPermissionImpl(this.id, this.name, this.removable);
   }
 
 }

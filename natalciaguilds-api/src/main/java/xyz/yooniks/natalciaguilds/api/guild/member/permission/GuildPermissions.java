@@ -33,14 +33,15 @@ public final class GuildPermissions {
   public static final GuildPermission OWNER = new GuildPermissionBuilder()
       .withId(ID_INCREMENTER.getAndIncrement())
       .withName("Zalozyciel gildii")
+      .removable(false)
       .build();
 
-  public static final Set<GuildPermission> PERMISSIONS_AS_SET = new HashSet<>(
-      Arrays.asList(ADD_MEMBERS, REMOVE_MEMBERS));
+  public static final Set<GuildPermission> PERMISSIONS = new HashSet<>(
+      Arrays.asList(ADD_MEMBERS, REMOVE_MEMBERS, PLACE_BLOCKS, BREAK_BLOCKS, OWNER));
 
   @Nullable
   public static GuildPermission byId(int id) {
-    return PERMISSIONS_AS_SET.stream()
+    return PERMISSIONS.stream()
         .filter(guildPermission -> guildPermission.getId() == id)
         .findFirst()
         .orElse(null);

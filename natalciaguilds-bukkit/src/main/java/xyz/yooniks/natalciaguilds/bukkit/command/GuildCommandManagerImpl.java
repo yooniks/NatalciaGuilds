@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.command.basic.impl;
+package xyz.yooniks.natalciaguilds.bukkit.command;
 
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
@@ -8,9 +8,6 @@ import javax.annotation.Nullable;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.Command;
 import xyz.yooniks.natalciaguilds.api.command.GuildCommandArgumentInfo;
-import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgument;
-import xyz.yooniks.natalciaguilds.bukkit.command.arg.basic.GuildCommandArgumentExecutor;
-import xyz.yooniks.natalciaguilds.bukkit.command.basic.GuildCommandManager;
 import xyz.yooniks.natalciaguilds.bukkit.helper.CommandHelper;
 
 public class GuildCommandManagerImpl implements GuildCommandManager {
