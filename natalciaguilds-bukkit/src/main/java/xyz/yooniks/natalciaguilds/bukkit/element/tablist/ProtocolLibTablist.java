@@ -40,14 +40,11 @@ public class ProtocolLibTablist implements Tablist {
 
     final List<PlayerInfoData> infoData = new ArrayList<>();
     for (Map.Entry<Integer, String> entry : this.elements.entrySet()) {
-      infoData.add(
-          new PlayerInfoData(
-              new WrappedGameProfile(UUID.randomUUID(), ""),
-              0,
-              EnumWrappers.NativeGameMode.NOT_SET,
-              WrappedChatComponent.fromText(entry.getValue()))
-      );
+      infoData.add(new PlayerInfoData(new WrappedGameProfile(UUID.randomUUID(), ""),
+          0, EnumWrappers.NativeGameMode.NOT_SET,
+          WrappedChatComponent.fromText(entry.getValue())));
     }
+
     info.getPlayerInfoDataLists().write(0, infoData);
 
     try {

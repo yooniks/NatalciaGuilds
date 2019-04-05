@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.user.task;
+package xyz.yooniks.natalciaguilds.bukkit.database.task;
 
 import xyz.yooniks.natalciaguilds.api.database.DatabaseDataManager;
 import xyz.yooniks.natalciaguilds.api.user.User;

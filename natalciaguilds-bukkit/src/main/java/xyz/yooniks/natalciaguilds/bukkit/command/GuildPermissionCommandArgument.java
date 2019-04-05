@@ -83,6 +83,12 @@ public class GuildPermissionCommandArgument implements GuildCommandArgumentExecu
         return;
       }
 
+      if (!permission.isRemovable()) {
+        MessageHelper.sendMessage(sender, "&cPermisja z id &6" + permissionId + " "
+            + "&cnie moze byc nadawania ani usuwana!");
+        return;
+      }
+
       if (args[0].equalsIgnoreCase("add")) {
         if (guild.hasPermission(targetMember, permission)) {
           MessageHelper.sendMessage(sender, "&cTen gracz ma juz taka permisje!");

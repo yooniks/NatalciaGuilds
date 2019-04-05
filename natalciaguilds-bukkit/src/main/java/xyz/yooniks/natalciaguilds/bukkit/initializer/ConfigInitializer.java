@@ -30,7 +30,7 @@ public class ConfigInitializer implements Initializer {
   }
 
   private void registerConfigs(Map<Class<? extends Config>, File> configs) {
-    configs.forEach((clazz, file) -> ConfigHelper.create(file, clazz));
+    configs.forEach((clazz, file) -> ConfigHelper.reload(new Config(file, clazz)));
   }
 
 }

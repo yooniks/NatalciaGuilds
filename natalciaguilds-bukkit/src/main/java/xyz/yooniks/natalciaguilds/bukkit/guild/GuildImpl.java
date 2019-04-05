@@ -3,8 +3,10 @@ package xyz.yooniks.natalciaguilds.bukkit.guild;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import org.bukkit.Bukkit;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.GuildInfo;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
@@ -41,18 +43,19 @@ public class GuildImpl implements Guild {
   }
 
   @Override
-  public boolean addPermission(GuildMember member, GuildPermission permission) {
-    return permissions.put(member.getIdentifier(), permission);
+  public void addPermission(GuildMember member, GuildPermission permission) {
+    permissions.put(member.getIdentifier(), permission);
   }
 
   @Override
-  public boolean removePermission(GuildMember member, GuildPermission permission) {
-    return permissions.remove(member.getIdentifier(), permission);
+  public void removePermission(GuildMember member, GuildPermission permission) {
+    permissions.remove(member.getIdentifier(), permission);
   }
 
   @Override
   public boolean hasPermission(GuildMember member, GuildPermission permission) {
-    return permissions.containsEntry(member.getIdentifier(), permission);
+    return getOwner().getIdentifier().equals(member.getIdentifier())
+        || permissions.containsEntry(member.getIdentifier(), permission);
   }
 
   @Override
@@ -78,6 +81,15 @@ public class GuildImpl implements Guild {
   @Override
   public boolean isMember(GuildMember member) {
     return this.members.contains(member);
+  }
+
+  @Override
+  public GuildMember findMemberByName(String name) {
+    return this.members.stream()
+        .filter(
+            member -> member.getIdentifier().equals(Bukkit.getOfflinePlayer(name).getUniqueId()))
+        .findFirst()
+        .orElse(null);
   }
 
   @Override
@@ -108,4 +120,26 @@ public class GuildImpl implements Guild {
     return ranking;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    GuildImpl guild = (GuildImpl) o;
+    return Objects.equals(tag, guild.tag) &&
+        Objects.equals(name, guild.name) &&
+        Objects.equals(area, guild.area) &&
+        Objects.equals(ranking, guild.ranking) &&
+        Objects.equals(members, guild.members) &&
+        Objects.equals(permissions, guild.permissions) &&
+        Objects.equals(info, guild.info);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(tag, name, area, ranking, members, permissions, info);
+  }
 }
