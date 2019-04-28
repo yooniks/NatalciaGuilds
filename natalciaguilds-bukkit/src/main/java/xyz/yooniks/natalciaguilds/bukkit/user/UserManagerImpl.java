@@ -2,9 +2,11 @@ package xyz.yooniks.natalciaguilds.bukkit.user;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import xyz.yooniks.natalciaguilds.api.user.User;
@@ -33,6 +35,11 @@ public class UserManagerImpl implements UserManager {
   }
 
   @Override
+  public Optional<User> findByIdentifier(UUID identifier) {
+    return Optional.ofNullable(this.userMap.get(identifier));
+  }
+
+  @Override
   public void removeUser(UUID uuid) {
     final User user = this.userMap.get(uuid);
     if (user != null) {
@@ -43,7 +50,7 @@ public class UserManagerImpl implements UserManager {
 
   @Override
   public List<User> getAll() {
-    return null;
+    return new ArrayList<>(this.userMap.values());
   }
 
 }

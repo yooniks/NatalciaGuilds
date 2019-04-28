@@ -7,7 +7,7 @@ public class GuildPermissionBuilder implements Buildable<GuildPermission> {
 
   private String name;
   private int id;
-  private boolean removable;
+  private boolean removable = true;
 
   public GuildPermissionBuilder removable(boolean removable) {
     this.removable = removable;
