@@ -15,6 +15,7 @@ public class MembersConverter implements DatabaseDataConverter<String, Set<Guild
 
   private static final Gson GSON = new Gson();
 
+  //TODO: Make classes implementing Serializable and use SerializeHelper from OpenSectors (a little edited)
   @Override
   public Set<GuildMember> fromDatabaseColumn(String strings) {
     return Arrays.stream(strings.split("-"))

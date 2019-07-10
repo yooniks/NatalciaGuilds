@@ -3,12 +3,11 @@ package xyz.yooniks.natalciaguilds.bukkit.guild;
 import java.util.Arrays;
 import java.util.Set;
 import org.apache.commons.lang.Validate;
-import xyz.yooniks.natalciaguilds.api.Buildable;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 
-public class GuildBuilder implements Buildable<Guild> {
+public class GuildBuilder {
 
   private String name, tag;
   private GuildArea area;
@@ -34,7 +33,6 @@ public class GuildBuilder implements Buildable<Guild> {
     return this;
   }
 
-  @Override
   public Guild build() {
     this.validate(this.name, this.tag, this.area, this.members);
 
