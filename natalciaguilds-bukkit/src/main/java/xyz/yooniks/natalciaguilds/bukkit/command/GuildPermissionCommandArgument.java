@@ -1,16 +1,17 @@
 package xyz.yooniks.natalciaguilds.bukkit.command;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import xyz.yooniks.natalciaguilds.api.command.GuildCommandArgumentInfo;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
-import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermissions;
 import xyz.yooniks.natalciaguilds.api.user.User;
 import xyz.yooniks.natalciaguilds.api.user.UserManager;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper;
+import xyz.yooniks.natalciaguilds.guild.member.permission.GuildPermissions;
 
 @GuildCommandArgumentInfo(
     names = {"permission", "permisje", "permisja", "permissions"},
@@ -42,7 +43,10 @@ public class GuildPermissionCommandArgument implements GuildCommandArgumentExecu
 
       if (args.length > 1) {
         final String targetName = args[1];
-        member = guild.findMemberByName(targetName);
+
+        final OfflinePlayer offlineTarget = Bukkit.getOfflinePlayer(targetName);
+        member = guild.findMemberByIdentifier(offlineTarget.getUniqueId());
+
         if (member == null) {
           MessageHelper.sendMessage(sender,
               "&cW twojej gildii nie ma gracza o nicku &6" + targetName + "&c!");
@@ -62,7 +66,9 @@ public class GuildPermissionCommandArgument implements GuildCommandArgumentExecu
     } else if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove")) {
 
       final String targetName = args[1];
-      final GuildMember targetMember = guild.findMemberByName(targetName);
+      final OfflinePlayer offlineTarget = Bukkit.getOfflinePlayer(targetName);
+      final GuildMember targetMember = guild.findMemberByIdentifier(offlineTarget.getUniqueId());
+
       if (targetMember == null) {
         MessageHelper
             .sendMessage(sender, "&cW twojej gildii nie ma gracza o nicku &6" + targetName + "&c!");

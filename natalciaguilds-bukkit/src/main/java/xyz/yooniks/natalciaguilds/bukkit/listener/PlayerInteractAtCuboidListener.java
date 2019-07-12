@@ -10,8 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
-import xyz.yooniks.natalciaguilds.api.guild.GuildFlags;
-import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermissions;
 import xyz.yooniks.natalciaguilds.api.user.User;
 import xyz.yooniks.natalciaguilds.api.user.UserManager;
 import xyz.yooniks.natalciaguilds.bukkit.config.MessagesConfig;
@@ -19,6 +17,8 @@ import xyz.yooniks.natalciaguilds.bukkit.guild.GuildManagerBukkit;
 import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaBukkit;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper.MessageBuilder;
+import xyz.yooniks.natalciaguilds.guild.GuildFlags;
+import xyz.yooniks.natalciaguilds.guild.member.permission.GuildPermissions;
 
 public class PlayerInteractAtCuboidListener implements Listener {
 

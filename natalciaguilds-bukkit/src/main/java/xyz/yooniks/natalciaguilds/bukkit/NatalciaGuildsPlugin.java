@@ -16,7 +16,7 @@ import xyz.yooniks.natalciaguilds.bukkit.initializer.ConfigInitializer;
 import xyz.yooniks.natalciaguilds.bukkit.initializer.GuildInitializer;
 import xyz.yooniks.natalciaguilds.bukkit.initializer.ListenerInitializer;
 import xyz.yooniks.natalciaguilds.bukkit.initializer.TablistInitializer;
-import xyz.yooniks.natalciaguilds.bukkit.user.UserManagerImpl;
+import xyz.yooniks.natalciaguilds.user.UserManagerImpl;
 
 public final class NatalciaGuildsPlugin extends JavaPlugin implements NatalciaGuilds {
 

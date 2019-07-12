@@ -1,10 +1,11 @@
-package xyz.yooniks.natalciaguilds.api.guild.member.permission;
+package xyz.yooniks.natalciaguilds.guild.member.permission;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.annotation.Nullable;
+import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
 
 public final class GuildPermissions {
 

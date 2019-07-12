@@ -1,11 +1,11 @@
-package xyz.yooniks.natalciaguilds.bukkit.user;
+package xyz.yooniks.natalciaguilds.user;
 
 import java.util.Objects;
 import java.util.UUID;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
-import xyz.yooniks.natalciaguilds.api.ranking.impl.UserRanking;
 import xyz.yooniks.natalciaguilds.api.user.User;
+import xyz.yooniks.natalciaguilds.ranking.UserRanking;
 
 public class UserImpl implements User {
 

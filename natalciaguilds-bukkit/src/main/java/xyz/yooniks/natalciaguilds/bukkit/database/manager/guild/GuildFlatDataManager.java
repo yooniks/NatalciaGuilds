@@ -7,24 +7,27 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
 import xyz.yooniks.natalciaguilds.api.database.DatabaseDataManager;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
-import xyz.yooniks.natalciaguilds.bukkit.NatalciaGuildsPlugin;
 import xyz.yooniks.natalciaguilds.bukkit.database.converter.DatabaseDataConverters;
 import xyz.yooniks.natalciaguilds.bukkit.database.updater.DataUpdater;
-import xyz.yooniks.natalciaguilds.bukkit.guild.GuildBuilder;
 import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaBukkit;
 import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaImpl;
+import xyz.yooniks.natalciaguilds.guild.GuildBuilder;
 
 public class GuildFlatDataManager implements DatabaseDataManager<Guild> {
 
-  private final FileHolder fileHolder = new FileHolder();
+  private final File mainDir;
+  private final File guildsDir;
 
   private final DataUpdater dataUpdater;
 
-  public GuildFlatDataManager(
-      DataUpdater dataUpdater) {
+  public GuildFlatDataManager(Plugin plugin, DataUpdater dataUpdater) {
     this.dataUpdater = dataUpdater;
+
+    this.mainDir = new File(plugin.getDataFolder(), "/data");
+    this.guildsDir = new File(this.mainDir, "/guilds");
   }
 
   @Override
@@ -36,7 +39,7 @@ public class GuildFlatDataManager implements DatabaseDataManager<Guild> {
   public List<Guild> findAll() {
     this.check();
 
-    return Arrays.stream(Objects.requireNonNull(this.fileHolder.guildsDir.listFiles()))
+    return Arrays.stream(Objects.requireNonNull(this.guildsDir.listFiles()))
         .map(YamlConfiguration::loadConfiguration)
         .map(yaml -> new GuildBuilder()
             .withName(yaml.getString("name"))
@@ -52,19 +55,17 @@ public class GuildFlatDataManager implements DatabaseDataManager<Guild> {
 
   @Override
   public void remove(Guild guild) {
-    this.dataUpdater.execute(() -> {
-      final File file = new File(this.fileHolder.guildsDir, guild.getTag() + ".yml");
-      if (!file.exists()) {
-        return;
-      }
-      file.delete();
-    });
+    final File file = new File(this.guildsDir, guild.getTag() + ".yml");
+    if (!file.exists()) {
+      return;
+    }
+    this.dataUpdater.execute(file::delete);
   }
 
   @Override
   public void update(Guild guild) {
     this.dataUpdater.execute(() -> {
-      final File file = new File(this.fileHolder.guildsDir, guild.getTag() + ".yml");
+      final File file = new File(this.guildsDir, guild.getTag() + ".yml");
       try {
         if (!file.exists()) {
           file.createNewFile();
@@ -88,19 +89,12 @@ public class GuildFlatDataManager implements DatabaseDataManager<Guild> {
   }
 
   private void check() {
-    if (this.fileHolder.mainDir.exists()) {
-      this.fileHolder.mainDir.mkdir();
+    if (this.mainDir.exists()) {
+      this.mainDir.mkdirs();
     }
-    if (!this.fileHolder.guildsDir.exists()) {
-      this.fileHolder.guildsDir.mkdir();
+    if (!this.guildsDir.exists()) {
+      this.guildsDir.mkdirs();
     }
-  }
-
-  private class FileHolder {
-
-    private final File mainDir = new File(NatalciaGuildsPlugin.getInstance()
-        .getDataFolder(), "/data");
-    private final File guildsDir = new File(this.mainDir, "/guilds");
   }
 
 }

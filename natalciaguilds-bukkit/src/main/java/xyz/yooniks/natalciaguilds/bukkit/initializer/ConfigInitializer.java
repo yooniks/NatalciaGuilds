@@ -6,14 +6,16 @@ import org.bukkit.plugin.Plugin;
 import xyz.yooniks.natalciaguilds.bukkit.config.MessagesConfig;
 import xyz.yooniks.natalciaguilds.bukkit.config.SettingsConfig;
 import xyz.yooniks.natalciaguilds.bukkit.config.system.Config;
-import xyz.yooniks.natalciaguilds.bukkit.config.system.ConfigHelper;
+import xyz.yooniks.natalciaguilds.bukkit.config.system.ConfigManager;
 
 public class ConfigInitializer implements Initializer {
 
   private final Plugin plugin;
+  private final ConfigManager configManager;
 
-  public ConfigInitializer(Plugin plugin) {
+  public ConfigInitializer(Plugin plugin, ConfigManager configManager) {
     this.plugin = plugin;
+    this.configManager = configManager;
   }
 
   @Override
@@ -21,14 +23,14 @@ public class ConfigInitializer implements Initializer {
     final File messages = new File(this.plugin.getDataFolder(), "messages.yml");
     final File settings = new File(this.plugin.getDataFolder(), "settings.yml");
 
-    this.registerConfigs(new SimpleConfig(MessagesConfig.class, messages),
+    this.initConfigs(new SimpleConfig(MessagesConfig.class, messages),
         new SimpleConfig(SettingsConfig.class, settings));
   }
 
-  private void registerConfigs(SimpleConfig... configs) {
+  private void initConfigs(SimpleConfig... configs) {
     Arrays.stream(configs)
         .map(config -> new Config(config.configFile, config.configClass))
-        .forEach(ConfigHelper::reload);
+        .forEach(this.configManager::reload);
   }
 
   private final class SimpleConfig {

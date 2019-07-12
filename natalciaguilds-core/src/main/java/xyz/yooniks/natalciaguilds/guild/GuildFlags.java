@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.api.guild;
+package xyz.yooniks.natalciaguilds.guild;
 
 public final class GuildFlags {
 

@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.api.ranking.impl;
+package xyz.yooniks.natalciaguilds.ranking;
 
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
 

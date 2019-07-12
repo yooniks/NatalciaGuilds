@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.guild;
+package xyz.yooniks.natalciaguilds.guild;
 
 import java.util.HashMap;
 import java.util.Map;

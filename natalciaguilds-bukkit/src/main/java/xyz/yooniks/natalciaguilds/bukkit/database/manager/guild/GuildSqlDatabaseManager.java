@@ -13,9 +13,9 @@ import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.bukkit.database.converter.DatabaseDataConverters;
 import xyz.yooniks.natalciaguilds.bukkit.database.updater.DataUpdater;
-import xyz.yooniks.natalciaguilds.bukkit.guild.GuildBuilder;
 import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaBukkit;
 import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaImpl;
+import xyz.yooniks.natalciaguilds.guild.GuildBuilder;
 
 public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
 

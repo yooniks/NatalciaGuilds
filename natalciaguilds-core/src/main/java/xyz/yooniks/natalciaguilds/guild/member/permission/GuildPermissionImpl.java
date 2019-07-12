@@ -1,4 +1,6 @@
-package xyz.yooniks.natalciaguilds.api.guild.member.permission;
+package xyz.yooniks.natalciaguilds.guild.member.permission;
+
+import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
 
 public class GuildPermissionImpl implements GuildPermission {
 

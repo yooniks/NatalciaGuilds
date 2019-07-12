@@ -18,7 +18,6 @@ public class UserFlatDataManager implements DatabaseDataManager<User> {
 
   @Override
   public void update(User user) {
-
   }
 
   @Override

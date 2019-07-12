@@ -1,8 +1,9 @@
-package xyz.yooniks.natalciaguilds.api.guild.member;
+package xyz.yooniks.natalciaguilds.guild.member;
 
 import java.util.UUID;
 import javax.annotation.Nullable;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
+import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
 
 public class GuildMemberImpl implements GuildMember {

@@ -1,7 +1,7 @@
 package xyz.yooniks.natalciaguilds.api.guild;
 
 import java.util.Set;
-import jdk.internal.jline.internal.Nullable;
+import java.util.UUID;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
@@ -23,8 +23,7 @@ public interface Guild {
 
   boolean isMember(GuildMember member);
 
-  @Nullable
-  GuildMember findMemberByName(String name);
+  GuildMember findMemberByIdentifier(UUID identifier);
 
   GuildMember getOwner();
 

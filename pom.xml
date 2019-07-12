@@ -11,6 +11,7 @@
   <modules>
     <module>natalciaguilds-api</module>
     <module>natalciaguilds-bukkit</module>
+    <module>natalciaguilds-core</module>
   </modules>
 
   <packaging>pom</packaging>

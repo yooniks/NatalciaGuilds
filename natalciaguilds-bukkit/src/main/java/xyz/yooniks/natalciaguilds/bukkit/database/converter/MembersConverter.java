@@ -7,9 +7,9 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import xyz.yooniks.natalciaguilds.api.database.DatabaseDataConverter;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
-import xyz.yooniks.natalciaguilds.api.guild.member.GuildMemberBuilder;
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
-import xyz.yooniks.natalciaguilds.api.ranking.impl.UserRanking;
+import xyz.yooniks.natalciaguilds.guild.member.GuildMemberBuilder;
+import xyz.yooniks.natalciaguilds.ranking.UserRanking;
 
 public class MembersConverter implements DatabaseDataConverter<String, Set<GuildMember>> {
 

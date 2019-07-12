@@ -1,6 +1,7 @@
 package xyz.yooniks.natalciaguilds.bukkit.helper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -9,6 +10,12 @@ public final class MessageHelper {
 
   public static String colored(String text) {
     return ChatColor.translateAlternateColorCodes('&', text);
+  }
+
+  public static List<String> colored(List<String> strings) {
+    return strings.stream()
+        .map(MessageHelper::colored)
+        .collect(Collectors.toList());
   }
 
   public static void sendMessage(CommandSender sender, String text) {

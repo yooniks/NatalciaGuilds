@@ -1,7 +1,8 @@
-package xyz.yooniks.natalciaguilds.api.guild.member;
+package xyz.yooniks.natalciaguilds.guild.member;
 
 import java.util.UUID;
 import org.apache.commons.lang3.Validate;
+import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
 
 public class GuildMemberBuilder {

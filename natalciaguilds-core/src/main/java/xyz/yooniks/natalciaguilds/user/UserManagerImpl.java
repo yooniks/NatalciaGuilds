@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.user;
+package xyz.yooniks.natalciaguilds.user;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

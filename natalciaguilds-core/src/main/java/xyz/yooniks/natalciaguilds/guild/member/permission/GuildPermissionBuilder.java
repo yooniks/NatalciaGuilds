@@ -1,6 +1,7 @@
-package xyz.yooniks.natalciaguilds.api.guild.member.permission;
+package xyz.yooniks.natalciaguilds.guild.member.permission;
 
 import org.apache.commons.lang3.Validate;
+import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
 
 public class GuildPermissionBuilder {
 

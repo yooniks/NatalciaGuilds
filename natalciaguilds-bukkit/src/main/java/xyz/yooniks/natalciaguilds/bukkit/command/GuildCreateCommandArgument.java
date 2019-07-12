@@ -15,16 +15,16 @@ import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildAreaCreator;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
-import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermissions;
 import xyz.yooniks.natalciaguilds.api.user.UserManager;
 import xyz.yooniks.natalciaguilds.bukkit.config.MessagesConfig;
 import xyz.yooniks.natalciaguilds.bukkit.config.SettingsConfig;
-import xyz.yooniks.natalciaguilds.bukkit.guild.GuildImpl;
 import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaImpl;
 import xyz.yooniks.natalciaguilds.bukkit.guild.area.creator.DefaultGuildAreaCreator;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper.MessageBuilder;
 import xyz.yooniks.natalciaguilds.bukkit.helper.PlayerHelper;
+import xyz.yooniks.natalciaguilds.guild.GuildImpl;
+import xyz.yooniks.natalciaguilds.guild.member.permission.GuildPermissions;
 
 @GuildCommandArgumentInfo(
     names = {"zaloz", "create"},

@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.bukkit.guild;
+package xyz.yooniks.natalciaguilds.guild;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -6,15 +6,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import org.bukkit.Bukkit;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.GuildInfo;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
-import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermissions;
 import xyz.yooniks.natalciaguilds.api.ranking.Ranking;
-import xyz.yooniks.natalciaguilds.api.ranking.impl.GuildRanking;
+import xyz.yooniks.natalciaguilds.guild.member.permission.GuildPermissions;
+import xyz.yooniks.natalciaguilds.ranking.GuildRanking;
 
 public class GuildImpl implements Guild {
 
@@ -65,7 +64,7 @@ public class GuildImpl implements Guild {
 
   @Override
   public Set<GuildMember> getMembers() {
-    return members;
+    return new HashSet<>(members);
   }
 
   @Override
@@ -84,10 +83,10 @@ public class GuildImpl implements Guild {
   }
 
   @Override
-  public GuildMember findMemberByName(String name) {
-    return this.members.stream()
-        .filter(
-            member -> member.getIdentifier().equals(Bukkit.getOfflinePlayer(name).getUniqueId()))
+  public GuildMember findMemberByIdentifier(UUID identifier) {
+    return this.members
+        .stream()
+        .filter(member -> member.getIdentifier().equals(identifier))
         .findFirst()
         .orElse(null);
   }

@@ -10,7 +10,6 @@ public class Config {
   public Config(File file, Class<?> clazz) {
     this.file = file;
     this.clazz = clazz;
-    ConfigHelper.reload(this);
   }
 
   public File getFile() {
