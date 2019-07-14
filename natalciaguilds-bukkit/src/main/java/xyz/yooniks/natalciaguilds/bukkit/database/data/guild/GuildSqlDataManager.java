@@ -1,8 +1,9 @@
-package xyz.yooniks.natalciaguilds.bukkit.database.manager.guild;
+package xyz.yooniks.natalciaguilds.bukkit.database.data.guild;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,23 +13,33 @@ import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.bukkit.database.converter.DatabaseDataConverters;
-import xyz.yooniks.natalciaguilds.bukkit.database.updater.DataUpdater;
 import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaBukkit;
 import xyz.yooniks.natalciaguilds.bukkit.guild.area.GuildAreaImpl;
 import xyz.yooniks.natalciaguilds.guild.GuildBuilder;
 
-public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
+public class GuildSqlDataManager implements DatabaseDataManager<Guild> {
 
   private final Connection connection;
-  private final DataUpdater dataUpdater;
 
-  public GuildSqlDatabaseManager(Connection connection, DataUpdater dataUpdater) {
+  public GuildSqlDataManager(Connection connection) {
     this.connection = connection;
-    this.dataUpdater = dataUpdater;
+  }
+
+  @Override
+  public void init() {
+
   }
 
   @Override
   public Guild load(Guild guild) {
+    try (final PreparedStatement statement = this.connection
+        .prepareStatement("SELECT * FROM guilds where guild_tag=?")) {
+      statement.setString(1, guild.getTag());
+
+
+    } catch (SQLException ex) {
+
+    }
     return null;
   }
 
@@ -65,23 +76,20 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
 
   @Override
   public void remove(Guild guild) {
-    this.dataUpdater.execute(() -> {
-      try (final PreparedStatement statement = this.connection
-          .prepareStatement("DELETE FROM guilds WHERE guild_tag=?")) {
-        statement.setString(1, guild.getTag());
-        statement.execute();
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
-    });
+    try (final PreparedStatement statement = this.connection
+        .prepareStatement("DELETE FROM guilds WHERE guild_tag=?")) {
+      statement.setString(1, guild.getTag());
+      statement.execute();
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
   }
 
   @Override
   public void update(Guild guild) {
-    this.dataUpdater.execute(() -> {
-      try (final PreparedStatement statement = this.connection
-          .prepareStatement("INSERT INTO guilds "
-              + "VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE guild_tag=?")) {
+    try (final PreparedStatement statement = this.connection
+        .prepareStatement("INSERT INTO guilds "
+            + "VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE guild_tag=?")) {
       /*
       1. tag
       2. name
@@ -89,22 +97,21 @@ public class GuildSqlDatabaseManager implements DatabaseDataManager<Guild> {
       4. area size
       5. members with owner
        */
-        statement.setString(1, guild.getTag());
-        statement.setString(2, guild.getName());
-        final GuildAreaBukkit area = (GuildAreaBukkit) guild.getArea();
-        statement
-            .setString(3,
-                DatabaseDataConverters.LOCATION_CONVERTER.toDatabaseColumn(area.getCenter()));
-        statement.setInt(4, area.getSize());
-        statement.setString(5,
-            DatabaseDataConverters.MEMBERS_CONVERTER.toDatabaseColumn(guild.getMembers()));
+      statement.setString(1, guild.getTag());
+      statement.setString(2, guild.getName());
+      final GuildAreaBukkit area = (GuildAreaBukkit) guild.getArea();
+      statement
+          .setString(3,
+              DatabaseDataConverters.LOCATION_CONVERTER.toDatabaseColumn(area.getCenter()));
+      statement.setInt(4, area.getSize());
+      statement.setString(5,
+          DatabaseDataConverters.MEMBERS_CONVERTER.toDatabaseColumn(guild.getMembers()));
 
-        statement.setString(6, guild.getTag());
-        statement.execute();
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
-    });
+      statement.setString(6, guild.getTag());
+      statement.execute();
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
   }
 
 }

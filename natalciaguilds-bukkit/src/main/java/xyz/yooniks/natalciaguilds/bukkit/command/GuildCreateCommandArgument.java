@@ -9,7 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import xyz.yooniks.natalciaguilds.api.command.GuildCommandArgumentInfo;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
 import xyz.yooniks.natalciaguilds.api.guild.area.GuildArea;
@@ -23,6 +22,7 @@ import xyz.yooniks.natalciaguilds.bukkit.guild.area.creator.DefaultGuildAreaCrea
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper.MessageBuilder;
 import xyz.yooniks.natalciaguilds.bukkit.helper.PlayerHelper;
+import xyz.yooniks.natalciaguilds.command.GuildCommandArgumentInfo;
 import xyz.yooniks.natalciaguilds.guild.GuildImpl;
 import xyz.yooniks.natalciaguilds.guild.member.permission.GuildPermissions;
 

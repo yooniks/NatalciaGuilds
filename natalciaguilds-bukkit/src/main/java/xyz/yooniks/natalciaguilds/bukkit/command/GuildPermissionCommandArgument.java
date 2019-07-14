@@ -4,13 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.yooniks.natalciaguilds.api.command.GuildCommandArgumentInfo;
 import xyz.yooniks.natalciaguilds.api.guild.Guild;
 import xyz.yooniks.natalciaguilds.api.guild.member.GuildMember;
 import xyz.yooniks.natalciaguilds.api.guild.member.permission.GuildPermission;
 import xyz.yooniks.natalciaguilds.api.user.User;
 import xyz.yooniks.natalciaguilds.api.user.UserManager;
 import xyz.yooniks.natalciaguilds.bukkit.helper.MessageHelper;
+import xyz.yooniks.natalciaguilds.command.GuildCommandArgumentInfo;
 import xyz.yooniks.natalciaguilds.guild.member.permission.GuildPermissions;
 
 @GuildCommandArgumentInfo(

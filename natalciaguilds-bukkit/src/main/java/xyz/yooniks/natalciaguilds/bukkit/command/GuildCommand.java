@@ -39,7 +39,7 @@ public class GuildCommand extends Command {
     }
 
     if (commandArgument.isPlayerOnly() && !(sender instanceof Player)) {
-      sender.sendMessage("PLAYER ONLY");
+      sender.sendMessage("This command is executable only by player");
       return true;
     }
 

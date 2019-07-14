@@ -1,4 +1,4 @@
-package xyz.yooniks.natalciaguilds.api.command;
+package xyz.yooniks.natalciaguilds.command;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

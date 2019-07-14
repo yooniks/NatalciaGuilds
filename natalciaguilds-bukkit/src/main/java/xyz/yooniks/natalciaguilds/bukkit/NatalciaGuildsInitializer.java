@@ -21,13 +21,12 @@ class NatalciaGuildsInitializer {
       initializer.initialize();
       time = System.currentTimeMillis() - time;
 
-      this.logger.info(
-          String
-              .format("%s made his task in: %d ms", initializer.getClass().getSimpleName(), time));
+      this.logger.info(String.format("%s made his task in: %d ms",
+          initializer.getClass().getSimpleName(), time));
     });
   }
 
-  public void addInitializer(Initializer... initializers) {
+  void addInitializer(Initializer... initializers) {
     this.initializers.addAll(Arrays.asList(initializers));
   }
 

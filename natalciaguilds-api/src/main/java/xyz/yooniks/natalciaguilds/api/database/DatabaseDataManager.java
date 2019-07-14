@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface DatabaseDataManager<T> {
 
+  void init();
+
   T load(T t);
 
   List<T> findAll();

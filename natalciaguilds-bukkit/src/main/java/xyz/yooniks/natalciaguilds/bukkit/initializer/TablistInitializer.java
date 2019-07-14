@@ -33,7 +33,7 @@ public class TablistInitializer implements Initializer {
         elementsFromSection(config.getConfigurationSection("tablist.element.slot")));
 
     this.plugin.getLogger()
-        .info("Using " + tablist.getClass().getSimpleName() + " as tablist updater");
+        .info("Using " + tablist.getClass().getSimpleName() + " as tablist concurrency");
 
     this.plugin.getServer().getScheduler().runTaskTimerAsynchronously(
         this.plugin, new TablistRunnable(tablist), 20L, 20L);

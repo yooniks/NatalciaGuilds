@@ -1,9 +1,9 @@
 package xyz.yooniks.natalciaguilds.bukkit.initializer;
 
 import xyz.yooniks.natalciaguilds.api.guild.GuildManager;
-import xyz.yooniks.natalciaguilds.bukkit.database.manager.guild.GuildFlatDataManager;
-import xyz.yooniks.natalciaguilds.bukkit.database.updater.DataUpdater;
-import xyz.yooniks.natalciaguilds.bukkit.database.updater.DataUpdaterBukkitTask;
+import xyz.yooniks.natalciaguilds.bukkit.database.concurrency.TaskExecutor;
+import xyz.yooniks.natalciaguilds.bukkit.database.concurrency.TaskExecutorBukkit;
+import xyz.yooniks.natalciaguilds.bukkit.database.data.guild.GuildFlatDataManager;
 
 public class GuildInitializer implements Initializer {
 
@@ -15,8 +15,8 @@ public class GuildInitializer implements Initializer {
 
   @Override
   public void initialize() {
-    final DataUpdater dataUpdater = new DataUpdaterBukkitTask();
-    this.guildManager.setDatabaseManager(new GuildFlatDataManager(dataUpdater));
+    final TaskExecutor taskExecutor = new TaskExecutorBukkit();
+    this.guildManager.setDatabaseManager(new GuildFlatDataManager(taskExecutor));
     this.guildManager.addGuilds(this.guildManager.getDatabaseManager().findAll());
   }
 

@@ -6,9 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.apache.commons.lang.Validate;
-import org.bukkit.command.Command;
-import xyz.yooniks.natalciaguilds.api.command.GuildCommandArgumentInfo;
-import xyz.yooniks.natalciaguilds.bukkit.helper.CommandHelper;
+import xyz.yooniks.natalciaguilds.command.GuildCommandArgumentInfo;
 
 public class GuildCommandManagerImpl implements GuildCommandManager {
 
@@ -21,11 +19,6 @@ public class GuildCommandManagerImpl implements GuildCommandManager {
         .filter(argument -> Arrays.asList(argument.getNames()).contains(name.toLowerCase()))
         .findFirst()
         .orElse(null);
-  }
-
-  @Override
-  public void registerCommand(Command command) {
-    CommandHelper.registerCommand(command.getName(), command);
   }
 
   @Override
